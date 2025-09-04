@@ -7,9 +7,9 @@ from pathlib import Path
 
 import pytest
 
-from cogents.core.goalith.errors import CycleDetectedError, NodeNotFoundError
-from cogents.core.goalith.goalgraph.graph import GoalGraph
-from cogents.core.goalith.goalgraph.node import GoalNode, NodeStatus
+from cogents_core.goalith.errors import CycleDetectedError, NodeNotFoundError
+from cogents_core.goalith.goalgraph.graph import GoalGraph
+from cogents_core.goalith.goalgraph.node import GoalNode, NodeStatus
 
 
 class TestGoalGraph:

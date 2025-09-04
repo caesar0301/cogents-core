@@ -4,9 +4,9 @@ Unit tests for CallableDecomposer class.
 
 import pytest
 
-from cogents.core.goalith.decomposer.callable_decomposer import CallableDecomposer
-from cogents.core.goalith.errors import DecompositionError
-from cogents.core.goalith.goalgraph.node import GoalNode
+from cogents_core.goalith.decomposer.callable_decomposer import CallableDecomposer
+from cogents_core.goalith.errors import DecompositionError
+from cogents_core.goalith.goalgraph.node import GoalNode
 
 
 class TestCallableDecomposer:
@@ -299,7 +299,7 @@ class TestCallableDecomposer:
 
     def test_callable_decomposer_inherits_goal_decomposer(self):
         """Test that CallableDecomposer inherits from GoalDecomposer."""
-        from cogents.core.goalith.decomposer.base import GoalDecomposer
+        from cogents_core.goalith.decomposer.base import GoalDecomposer
 
         def test_decompose(goal_node, context=None):
             return []

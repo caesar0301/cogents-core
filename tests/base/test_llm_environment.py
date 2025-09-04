@@ -72,7 +72,7 @@ class TestLLMEnvironment:
 
     def test_llm_client_factory_function(self):
         """Test that get_llm_client factory function works."""
-        from cogents.core.base.llm import get_llm_client
+        from cogents_core.llm import get_llm_client
 
         # Test that all supported providers can be instantiated (may skip due to missing deps)
         providers = ["openrouter", "openai", "ollama"]

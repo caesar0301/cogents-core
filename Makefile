@@ -2,8 +2,8 @@
 PYTHON = python3
 POETRY = poetry
 PYTEST = pytest
-PYTHON_MODULES = cogents tests examples
-COVERAGE_MODULES = cogents
+PYTHON_MODULES = cogents_core tests examples
+COVERAGE_MODULES = cogents_core
 TEST_DIR = tests
 LINE_LENGTH = 120
 

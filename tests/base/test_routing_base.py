@@ -8,8 +8,8 @@ from unittest.mock import Mock
 
 import pytest
 
-from cogents.core.base.routing.base import BaseRoutingStrategy
-from cogents.core.base.routing.types import ComplexityScore, ModelTier, RoutingResult
+from cogents_core.routing.base import BaseRoutingStrategy
+from cogents_core.routing.types import ComplexityScore, ModelTier, RoutingResult
 
 
 class ConcreteRoutingStrategy(BaseRoutingStrategy):

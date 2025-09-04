@@ -3,8 +3,8 @@ Unit tests for SimpleListDecomposer class.
 """
 
 
-from cogents.core.goalith.decomposer.simple_decomposer import SimpleListDecomposer
-from cogents.core.goalith.goalgraph.node import GoalNode, NodeStatus
+from cogents_core.goalith.decomposer.simple_decomposer import SimpleListDecomposer
+from cogents_core.goalith.goalgraph.node import GoalNode, NodeStatus
 
 
 class TestSimpleListDecomposer:
@@ -237,7 +237,7 @@ class TestSimpleListDecomposer:
 
     def test_simple_list_decomposer_inherits_goal_decomposer(self):
         """Test that SimpleListDecomposer inherits from GoalDecomposer."""
-        from cogents.core.goalith.decomposer.base import GoalDecomposer
+        from cogents_core.goalith.decomposer.base import GoalDecomposer
 
         assert issubclass(SimpleListDecomposer, GoalDecomposer)
 

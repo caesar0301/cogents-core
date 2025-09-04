@@ -21,7 +21,7 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-packages = [{include = "cogents"}]
+packages = [{include = "cogents_core"}]
 
 [tool.poetry.dependencies]
 # Basic dependencies
@@ -87,7 +87,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source = ["cogents"]
+source = ["cogents_core"]
 
 [tool.coverage.report]
 exclude_lines = [

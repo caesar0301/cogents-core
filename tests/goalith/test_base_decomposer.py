@@ -6,8 +6,8 @@ from abc import ABC
 
 import pytest
 
-from cogents.core.goalith.decomposer.base import GoalDecomposer
-from cogents.core.goalith.goalgraph.node import GoalNode
+from cogents_core.goalith.decomposer.base import GoalDecomposer
+from cogents_core.goalith.goalgraph.node import GoalNode
 
 
 class TestGoalDecomposer:

@@ -8,10 +8,10 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from cogents.core.base.routing.base import BaseRoutingStrategy
-from cogents.core.base.routing.router import ModelRouter
-from cogents.core.base.routing.strategies import DynamicComplexityStrategy, SelfAssessmentStrategy
-from cogents.core.base.routing.types import ComplexityScore, ModelTier, RoutingResult
+from cogents_core.routing.base import BaseRoutingStrategy
+from cogents_core.routing.router import ModelRouter
+from cogents_core.routing.strategies import DynamicComplexityStrategy, SelfAssessmentStrategy
+from cogents_core.routing.types import ComplexityScore, ModelTier, RoutingResult
 
 
 class MockStrategy(BaseRoutingStrategy):
@@ -42,7 +42,7 @@ class TestModelRouter:
 
     def test_init_default_strategy(self):
         """Test ModelRouter initialization with default strategy."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.return_value = Mock()
 
             router = ModelRouter()
@@ -52,7 +52,7 @@ class TestModelRouter:
 
     def test_init_with_strategy_name(self):
         """Test ModelRouter initialization with strategy name."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.return_value = Mock()
 
             router = ModelRouter(strategy="self_assessment")
@@ -63,7 +63,7 @@ class TestModelRouter:
         """Test ModelRouter initialization with strategy instance."""
         strategy = MockStrategy(lite_client=mock_llm_client)
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=strategy)
@@ -80,7 +80,7 @@ class TestModelRouter:
         """Test ModelRouter initialization with lite client config."""
         config = {"provider": "openai", "chat_model": "gpt-4o-mini"}
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_client = Mock()
             mock_get_client.return_value = mock_client
 
@@ -99,7 +99,7 @@ class TestModelRouter:
 
     def test_init_invalid_strategy_name(self):
         """Test ModelRouter initialization with invalid strategy name."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             with pytest.raises(ValueError, match="Unknown strategy"):
@@ -107,7 +107,7 @@ class TestModelRouter:
 
     def test_lite_client_setup_fallback_llamacpp(self):
         """Test lite client setup with llamacpp fallback."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_client = Mock()
             mock_get_client.return_value = mock_client
 
@@ -119,7 +119,7 @@ class TestModelRouter:
 
     def test_lite_client_setup_fallback_openai(self):
         """Test lite client setup with OpenAI fallback when llamacpp fails."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             # First call (llamacpp) fails, second call (openai) succeeds
             mock_client = Mock()
             mock_get_client.side_effect = [Exception("llamacpp failed"), mock_client]
@@ -132,10 +132,10 @@ class TestModelRouter:
 
     def test_lite_client_setup_complete_failure(self):
         """Test lite client setup when all providers fail."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("All providers failed")
 
-            with patch("cogents.core.base.logging.get_logger"):
+            with patch("cogents_core.logging_config.get_logger"):
                 router = ModelRouter()
 
                 assert router.lite_client is None
@@ -144,7 +144,7 @@ class TestModelRouter:
         """Test successful routing."""
         strategy = MockStrategy(return_tier=ModelTier.POWER)
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=strategy)
@@ -160,7 +160,7 @@ class TestModelRouter:
         """Test routing with empty query."""
         strategy = MockStrategy()
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=strategy)
@@ -176,7 +176,7 @@ class TestModelRouter:
         """Test routing with whitespace-only query."""
         strategy = MockStrategy()
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=strategy)
@@ -190,7 +190,7 @@ class TestModelRouter:
         """Test that route strips whitespace from query."""
         strategy = MockStrategy(return_tier=ModelTier.FAST)
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=strategy)
@@ -201,7 +201,7 @@ class TestModelRouter:
             assert result.tier == ModelTier.FAST
             assert "empty_query" not in result.metadata
 
-    @patch("cogents.core.base.logging.get_logger")
+    @patch("cogents_core.logging_config.get_logger")
     def test_route_strategy_exception(self, mock_logger):
         """Test route method when strategy raises exception."""
 
@@ -213,7 +213,7 @@ class TestModelRouter:
             def get_strategy_name(self) -> str:
                 return "error_strategy"
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=ErrorStrategy())
@@ -228,7 +228,7 @@ class TestModelRouter:
 
     def test_get_recommended_model_params_default(self):
         """Test getting default model parameters."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=MockStrategy())
@@ -248,7 +248,7 @@ class TestModelRouter:
 
     def test_get_recommended_model_params_all_tiers(self):
         """Test getting model parameters for all tiers."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=MockStrategy())
@@ -276,7 +276,7 @@ class TestModelRouter:
 
     def test_get_recommended_model_params_custom_configs(self):
         """Test getting model parameters with custom configs."""
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=MockStrategy())
@@ -298,7 +298,7 @@ class TestModelRouter:
         """Test route_and_configure method."""
         strategy = MockStrategy(return_tier=ModelTier.POWER)
 
-        with patch("cogents.core.base.routing.router.get_llm_client") as mock_get_client:
+        with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("Should not be called")
 
             router = ModelRouter(strategy=strategy)
@@ -386,8 +386,8 @@ class TestModelRouter:
 
     def test_strategy_initialization_logging(self):
         """Test that strategy initialization is logged."""
-        with patch("cogents.core.base.routing.router.get_llm_client"):
-            with patch("cogents.core.base.routing.router.logger") as mock_logger:
+        with patch("cogents_core.routing.router.get_llm_client"):
+            with patch("cogents_core.routing.router.logger") as mock_logger:
                 router = ModelRouter(strategy="self_assessment")
 
                 # Should log initialization

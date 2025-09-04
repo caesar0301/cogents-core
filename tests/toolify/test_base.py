@@ -6,8 +6,8 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from cogents.core.toolify.base import AsyncBaseToolkit, BaseToolkit, ToolConverter, ToolkitError
-from cogents.core.toolify.config import ToolkitConfig
+from cogents_core.toolify.base import AsyncBaseToolkit, BaseToolkit, ToolConverter, ToolkitError
+from cogents_core.toolify.config import ToolkitConfig
 
 
 class MockSyncToolkit(BaseToolkit):
@@ -120,7 +120,7 @@ class TestBaseToolkit:
         with pytest.raises(ToolkitError, match="Tool 'tool2' not found"):
             toolkit.call_tool("tool2", x="test")
 
-    @patch("cogents.core.toolify.base.ToolConverter.function_to_langchain")
+    @patch("cogents_core.toolify.base.ToolConverter.function_to_langchain")
     def test_get_langchain_tools(self, mock_converter):
         """Test getting LangChain tools."""
         mock_tool = Mock()
@@ -228,7 +228,7 @@ class TestToolConverter:
             """Test function docstring."""
             return f"result: {x}"
 
-        with patch("cogents.core.toolify.base.tool") as mock_tool:
+        with patch("cogents_core.toolify.base.tool") as mock_tool:
             mock_tool.return_value = lambda f: f  # Mock decorator
 
             ToolConverter.function_to_langchain(test_func)
@@ -241,7 +241,7 @@ class TestToolConverter:
         def test_func(x: str) -> str:
             return f"result: {x}"
 
-        with patch("cogents.core.toolify.base.tool") as mock_tool:
+        with patch("cogents_core.toolify.base.tool") as mock_tool:
             mock_tool.return_value = lambda f: f
 
             ToolConverter.function_to_langchain(test_func, name="custom_name", description="custom description")

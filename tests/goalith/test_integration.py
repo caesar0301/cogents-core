@@ -4,11 +4,11 @@ Integration tests for goalith module components.
 
 import pytest
 
-from cogents.core.goalith.decomposer.callable_decomposer import CallableDecomposer
-from cogents.core.goalith.decomposer.simple_decomposer import SimpleListDecomposer
-from cogents.core.goalith.errors import CycleDetectedError, DecompositionError
-from cogents.core.goalith.goalgraph.graph import GoalGraph
-from cogents.core.goalith.goalgraph.node import GoalNode, NodeStatus
+from cogents_core.goalith.decomposer.callable_decomposer import CallableDecomposer
+from cogents_core.goalith.decomposer.simple_decomposer import SimpleListDecomposer
+from cogents_core.goalith.errors import CycleDetectedError, DecompositionError
+from cogents_core.goalith.goalgraph.graph import GoalGraph
+from cogents_core.goalith.goalgraph.node import GoalNode, NodeStatus
 
 
 class TestGoalithIntegration:

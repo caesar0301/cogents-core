@@ -12,7 +12,7 @@ Welcome to cogents-core's documentation!
 API Reference
 -------------
 
-.. automodule:: cogents.core
+.. automodule:: cogents_core
     :members:
     :undoc-members:
     :show-inheritance: 

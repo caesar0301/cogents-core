@@ -5,14 +5,14 @@
 Cogents is a collection of essential building blocks for constructing sophisticated multi-agent systems.
 
 ### Key Modules
-- `cogents.core.base.llm` - LLM provider abstractions with support for OpenAI, OpenRouter, Ollama, and LlamaCpp
-- `cogents.core.base` - Base classes and utilities for agents, search, vector stores, and web surfing
-- `cogents.core.goalith` - Goal management and planning system with decomposition, conflict detection, and replanning
-- `cogents.core.memory` - Memory management for agents
-- `cogents.core.toolify` - Tool integration framework with registry and execution capabilities
+- `cogents_core.llm` - LLM provider abstractions with support for OpenAI, OpenRouter, Ollama, and LlamaCpp
+- `cogents_core.base` - Base classes and utilities for agents, search, vector stores, and web surfing
+- `cogents_core.goalith` - Goal management and planning system with decomposition, conflict detection, and replanning
+- `cogents_core.memory` - Memory management for agents
+- `cogents_core.toolify` - Tool integration framework with registry and execution capabilities
 
 ### LLM Providers
-Supported providers in `cogents.core.base.llm`:
+Supported providers in `cogents_core.llm`:
 - `openai` - OpenAI API compatible services
 - `openrouter` - OpenRouter API
 - `ollama` - Local Ollama instances  
@@ -46,7 +46,7 @@ cogents/
 
 ### Core Module Details
 
-**Base (`cogents.core.base`)**
+**Base (`cogents_core.base`)**
 - `base_agent.py` - Abstract base agent class
 - `base_search.py` - Search functionality base
 - `base_vectorstore.py` - Vector store abstractions
@@ -56,36 +56,36 @@ cogents/
 - `routing/` - LLM routing strategies (dynamic complexity, self-assessment)
 - `tracing/` - Token tracking and Opik tracing integration
 
-**Goalith (`cogents.core.goalith`)**
+**Goalith (`cogents_core.goalith`)**
 - `decomposer/` - Goal decomposition strategies (LLM-based, callable, simple)
 - `goalgraph/` - Goal graph data structures and operations
 - `conflict/` - Goal conflict detection and resolution
 - `replanner/` - Dynamic goal replanning capabilities
 - `service.py` - Main Goalith service interface
 
-**Toolify (`cogents.core.toolify`)**
+**Toolify (`cogents_core.toolify`)**
 - `registry.py` - Tool registration and management
 - `base.py` - Base tool classes and interfaces
 - `config.py` - Tool configuration management
 - `mcp_integration.py` - Model Context Protocol integration
 
-**Memory (`cogents.core.memory`)**
+**Memory (`cogents_core.memory`)**
 - Memory management system (currently in development)
 - Will provide persistent memory capabilities for agents
 
 ### Additional Base Components
 
-**Message Bus (`cogents.core.base.msgbus`)**
+**Message Bus (`cogents_core.msgbus`)**
 - Inter-agent communication system
 - Event-driven architecture support
 - Message routing and delivery
 
-**Routing (`cogents.core.base.routing`)**
+**Routing (`cogents_core.routing`)**
 - LLM routing strategies for optimal model selection
 - Dynamic complexity-based routing
 - Self-assessment routing for task complexity evaluation
 
-**Tracing (`cogents.core.base.tracing`)**
+**Tracing (`cogents_core.tracing`)**
 - Token usage tracking and monitoring
 - Opik tracing integration for observability
 - LangGraph hooks for workflow tracing
@@ -118,12 +118,12 @@ cogents/
 poetry run python examples/base/llamacpp_demo.py
 poetry run python examples/goalith/goalith_decomposer_example.py
 poetry run pytest tests/
-poetry run python -m cogents.core.example
+poetry run python -m cogents_core.example
 
 # ❌ Incorrect
 python examples/base/llamacpp_demo.py
 pytest tests/
-python -m cogents.core.example
+python -m cogents_core.example
 ```
 
 ## Usage Examples
@@ -132,23 +132,23 @@ python -m cogents.core.example
 
 ```python
 # LLM clients
-from cogents.core.base.llm import get_llm_client
+from cogents_core.llm import get_llm_client
 
 # Goal management
-from cogents.core.goalith.service import GoalithService
-from cogents.core.goalith.decomposer import LLMDecomposer
+from cogents_core.goalith.service import GoalithService
+from cogents_core.goalith.decomposer import LLMDecomposer
 
 # Tool management
-from cogents.core.toolify.registry import ToolRegistry
+from cogents_core.toolify.registry import ToolRegistry
 
 # Base classes
-from cogents.core.base.base_agent import BaseAgent
+from cogents_core.base.base_agent import BaseAgent
 ```
 
 ### LLM Usage Examples
 
 ```python
-from cogents.core.base.llm import get_llm_client
+from cogents_core.llm import get_llm_client
 
 # OpenAI/OpenRouter providers
 client = get_llm_client(provider="openai", api_key="sk-...")

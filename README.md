@@ -47,7 +47,7 @@ cogents/core
 ## Creating a New Agent
 
 ### From Base Classes
-Start with the base agent classes in `cogents.core.base` to create custom agents with full control over behavior and capabilities.
+Start with the base agent classes in `cogents_core.base` to create custom agents with full control over behavior and capabilities.
 
 #### Base Agent Class Hierarchy
 
@@ -93,7 +93,7 @@ BaseAgent (abstract)
 Use well-constructed agents like Seekra Agent as templates:
 
 ```python
-from cogents.core.agents.seekra_agent import SeekraAgent
+from cogents_core.agents.seekra_agent import SeekraAgent
 
 # Extend Seekra Agent for custom research tasks
 class CustomResearchAgent(SeekraAgent):

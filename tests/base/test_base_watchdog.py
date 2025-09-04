@@ -8,7 +8,7 @@ from bubus import BaseEvent, EventBus
 from bubus.models import T_EventResultType
 from pydantic import Field, PrivateAttr, ValidationError
 
-from cogents.core.base.msgbus.base import BaseWatchdog
+from cogents_core.msgbus.base import BaseWatchdog
 
 
 # Test Events

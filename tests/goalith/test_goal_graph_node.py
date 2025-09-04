@@ -5,7 +5,7 @@ Unit tests for GoalNode class.
 from datetime import datetime, timezone
 from unittest.mock import patch
 
-from cogents.core.goalith.goalgraph.node import GoalNode, NodeStatus
+from cogents_core.goalith.goalgraph.node import GoalNode, NodeStatus
 
 
 class TestGoalNode:
@@ -141,7 +141,7 @@ class TestGoalNode:
         node.status = NodeStatus.COMPLETED
         assert node.can_retry() is False
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_mark_started(self, mock_datetime):
         """Test mark_started method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -154,7 +154,7 @@ class TestGoalNode:
         assert node.started_at == mock_now
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_mark_completed(self, mock_datetime):
         """Test mark_completed method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -167,7 +167,7 @@ class TestGoalNode:
         assert node.completed_at == mock_now
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_mark_failed(self, mock_datetime):
         """Test mark_failed method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -192,7 +192,7 @@ class TestGoalNode:
         assert node.error_message == "Test error"  # Should not change
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_mark_cancelled(self, mock_datetime):
         """Test mark_cancelled method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -204,7 +204,7 @@ class TestGoalNode:
         assert node.status == NodeStatus.CANCELLED
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_add_note(self, mock_datetime):
         """Test add_note method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -217,7 +217,7 @@ class TestGoalNode:
         assert node.execution_notes[expected_key] == "Test note"
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_update_context(self, mock_datetime):
         """Test update_context method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -229,7 +229,7 @@ class TestGoalNode:
         assert node.context["key"] == "value"
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_add_dependency(self, mock_datetime):
         """Test add_dependency method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -241,7 +241,7 @@ class TestGoalNode:
         assert "dep1" in node.dependencies
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_remove_dependency(self, mock_datetime):
         """Test remove_dependency method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -256,7 +256,7 @@ class TestGoalNode:
         assert "dep2" in node.dependencies
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_add_child(self, mock_datetime):
         """Test add_child method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)
@@ -268,7 +268,7 @@ class TestGoalNode:
         assert "child1" in node.children
         assert node.updated_at == mock_now
 
-    @patch("cogents.core.goalith.goalgraph.node.datetime")
+    @patch("cogents_core.goalith.goalgraph.node.datetime")
     def test_remove_child(self, mock_datetime):
         """Test remove_child method."""
         mock_now = datetime(2023, 1, 1, 12, 0, 0, tzinfo=timezone.utc)

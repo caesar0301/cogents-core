@@ -10,7 +10,7 @@ import os
 import pytest
 from pydantic import BaseModel
 
-from cogents.core.base.llm.litellm import LLMClient
+from cogents_core.llm.litellm import LLMClient
 
 
 class TestResponse(BaseModel):

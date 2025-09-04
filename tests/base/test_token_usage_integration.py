@@ -10,8 +10,8 @@ import os
 
 import pytest
 
-from cogents.core.base.llm import get_llm_client
-from cogents.core.base.tracing import TokenUsage, TokenUsageCallback, get_token_tracker
+from cogents_core.llm import get_llm_client
+from cogents_core.tracing import TokenUsage, TokenUsageCallback, get_token_tracker
 
 
 @pytest.mark.integration
@@ -228,7 +228,7 @@ class TestTokenUsageIntegration:
 
     def test_token_estimation_fallback(self):
         """Test token estimation when actual usage is not available."""
-        from cogents.core.base.tracing import estimate_token_usage
+        from cogents_core.tracing import estimate_token_usage
 
         prompt_text = "This is a test prompt with some words"
         completion_text = "This is a test response with different words"
