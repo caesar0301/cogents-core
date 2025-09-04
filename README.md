@@ -1,7 +1,7 @@
 # Cogents
 
 [![CI](https://github.com/mirasurf/cogents-core/actions/workflows/ci.yml/badge.svg)](https://github.com/mirasurf/cogents-core/actions/workflows/ci.yml)
-[![PyPI version](https://img.shields.io/pypi/v/cogents.svg)](https://pypi.org/project/cogents/)
+[![PyPI version](https://img.shields.io/pypi/v/cogents-core.svg)](https://pypi.org/project/cogents-core/)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mirasurf/cogents-core)
 
 A comprehensive collection of essential building blocks for constructing cognitive multi-agent systems (MAS). Rather than building a full agent framework, Cogents provides a lightweight repository of key components designed to bridge the final mile in MAS development. Our philosophy focuses on modular, composable components that can be easily integrated into existing systems or used to build new ones from the ground up. For the underlying philosophy, refer to my talk on MAS ([link](https://github.com/caesar0301/mas-talk-2508/blob/master/mas-talk-xmingc.pdf)).
@@ -16,12 +16,6 @@ Cogents offers a comprehensive set of modules for creating intelligent agent-bas
 - **Tracing & monitoring**: Built-in token tracking and Opik tracing integration
 - **Extensible architecture**: Easy to add new LLM providers
 
-### Extensible Resources & Capabilities
-- **Web search**: Tavily and Google AI Search integration
-- **Vector stores**: Weaviate and PostgreSQL with pgvector support
-- **Semantic search**: Integrated semantic web search with document processing
-- **Voice processing**: Smart voice transcription and processing features
-
 ### Goal Management & Planning
 - **Goal decomposition**: LLM-based and callable goal decomposition strategies
 - **Conflict detection**: Automated goal conflict identification and resolution
@@ -32,30 +26,28 @@ Cogents offers a comprehensive set of modules for creating intelligent agent-bas
 - **Execution engine**: Robust tool execution with error handling
 - **Repository system**: Organized tool storage and retrieval
 
-### Agent Gallery
-- **Askura Agent**: Advanced conversation and memory management agent
-- **Seekra Agent**: Research-focused agent with web search capabilities
-- **Mem Agent**: Memory-focused agent (coming soon)
-- **Cogito Agent**: Cognitive reasoning agent (coming soon)
+### Memory Management
+- Under development
+
+### Orchestration
+- Under development
+
 
 ## Project Structure
 
 ```
-cogents/
-├── agents/           # Agent implementations
+cogents/core
 ├── base/            # Base classes and models
-├── common/          # Shared utilities and LLM integrations
 ├── goalith/         # Goal management and planning
 ├── memory/          # Memory management (on plan)
 ├── orchestrix/      # Global orchestration (on plan)
-├── resources/       # External service integrations
 └── toolify/         # Tool management and execution
 ```
 
 ## Creating a New Agent
 
 ### From Base Classes
-Start with the base agent classes in `cogents.base` to create custom agents with full control over behavior and capabilities.
+Start with the base agent classes in `cogents.core.base` to create custom agents with full control over behavior and capabilities.
 
 #### Base Agent Class Hierarchy
 
@@ -117,17 +109,9 @@ class CustomResearchAgent(SeekraAgent):
 ## Install
 
 ```
-pip install -U cogents
+pip install -U cogents-core
 ```
-
-## Documentation
-
-For detailed documentation, visit: https://cogents.readthedocs.io/ (under construction)
 
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
-
-## Acknowledgment
-
-- Tencent [Youtu-agent](https://github.com/Tencent/Youtu-agent) toolkits integration.
