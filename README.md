@@ -1,4 +1,4 @@
-# Cogents
+# Cogents-core
 
 [![CI](https://github.com/mirasurf/cogents-core/actions/workflows/ci.yml/badge.svg)](https://github.com/mirasurf/cogents-core/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/cogents-core.svg)](https://pypi.org/project/cogents-core/)
