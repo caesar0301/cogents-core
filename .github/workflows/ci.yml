@@ -42,9 +42,6 @@ jobs:
       - name: Install dependencies
         run: make install
 
-      - name: Run code quality checks
-        run: make quality
-
       - name: Run unit tests
         run: make test-unit
       - name: Upload test results

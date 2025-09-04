@@ -55,7 +55,6 @@ jobs:
           echo "❌ Version mismatch: RELEASE_TAG '$RELEASE_TAG' should contain POETRY_VERSION '$POETRY_VERSION'"
           exit 1
         fi
-        # Run tests and quality checks
         make test-unit
     
     - name: Build and verify package
