@@ -1,0 +1,180 @@
+{
+  "basic_usage": {
+    "simple_prompt": [
+      {
+        "role": "system",
+        "content": "You are a helpful assistant for web automation. Today is 2025-09-05."
+      }
+    ],
+    "markdown_template": [
+      {
+        "role": "system",
+        "content": "You are a web search assistant specialized in helping users find information online.\n\nYour current task: Find reliable tools for web automation\n\n**Search Parameters:**\n- Query: \"best Python web scraping libraries\"\n- Max results to consider: 10\n- Search type: technical\n- Language: English\n- Current date: {{ datetime.now().strftime('%Y-%m-%d') }}\n\nPerform a general web search covering various types of sources.\n\n**Instructions:**\n1. Understand the search intent behind: \"best Python web scraping libraries\"\n2. Navigate to relevant websites systematically\n3. Extract key information and verify credibility\n4. Provide a comprehensive summary with sources\n5. Suggest follow-up searches if needed\n\nRemember to be thorough but efficient in your search approach."
+      },
+      {
+        "role": "user",
+        "content": "Start the web search for: best Python web scraping libraries"
+      }
+    ],
+    "yaml_template": [
+      {
+        "role": "system",
+        "content": "You are a data extraction specialist. Your task is to extract product information from web pages.\n\n**Output Requirements:**\n- Format: JSON\n- Field mappings:\n  - item_name \u2192 product_name\n  - cost \u2192 price\n\n**Validation Rules:**\n- Price must be numeric\n- Name cannot be empty\n\n**Error Handling:** strict\n- Stop extraction if any critical errors occur\n- Report all validation failures\n\nAlways structure your extracted data according to the specified format."
+      },
+      {
+        "role": "user",
+        "content": "Please extract product information from the current page in JSON format.\nApply the specified field mappings during extraction.\n"
+      }
+    ],
+    "json_template": [
+      {
+        "role": "system",
+        "content": "You are a form filling assistant. Your task is to accurately fill out web forms using the provided data.\n\n**Form Data to Use:**\n- name: John Doe\n- email: john@example.com\n- phone: +1-555-0123\n\n**Field Matching Strategy:** smart_match\n- Use intelligent field detection based on labels, placeholders, and context\n- Handle variations in field names and formats\n\n**Validation Mode:** strict\n- Validate all inputs before entering data\n- Check for required fields and format requirements\n\n**Auto-submit:** No - Fill fields but do not submit\n\nBe careful and accurate when filling forms. Double-check critical information."
+      },
+      {
+        "role": "user",
+        "content": "Please fill out the form on this page using the provided data. Do not submit the form after filling."
+      }
+    ]
+  },
+  "template_engines": {
+    "string_engine": [
+      {
+        "role": "system",
+        "content": "Hello John, your USD balance is $balance."
+      }
+    ],
+    "format_engine": [
+      {
+        "role": "system",
+        "content": "Hello John, your USD balance is $150.75."
+      }
+    ],
+    "jinja_engine": [
+      {
+        "role": "system",
+        "content": "Hello John, your USD balance is $150.75."
+      }
+    ]
+  },
+  "conditional_logic": {
+    "beginner_mode": [
+      {
+        "role": "system",
+        "content": "You are an AI assistant specialized in beginner support.\n\n**Mode:** Beginner-friendly explanations\n- Use simple language\n- Provide step-by-step instructions\n- Include helpful examples\n\nPriority level: \n"
+      },
+      {
+        "role": "user",
+        "content": "Please provide detailed, step-by-step instructions for: install Python packages\n"
+      }
+    ],
+    "expert_mode": [
+      {
+        "role": "system",
+        "content": "You are an AI assistant specialized in expert support.\n\n**Mode:** Expert-level responses\n- Use technical terminology\n- Focus on efficiency\n- Assume background knowledge\n\nPriority level: HIGH\n**Note:** High complexity task - take extra care with accuracy.\n"
+      },
+      {
+        "role": "user",
+        "content": "Provide a concise solution for: optimize database queries\n"
+      },
+      {
+        "role": "assistant",
+        "content": "This message appears only in debug mode."
+      }
+    ]
+  },
+  "custom_functions": {
+    "custom_functions": [
+      {
+        "role": "system",
+        "content": "\nYou are processing user data:\n\n**Financial Info:**\n- Account balance: \u20ac2500.99\n- Credit limit: $5000.00\n\n**Contact Validation:**\n- Email: user@example.com \n  \u2713 Email format is valid\n\n**Summary:**\nThis is a very long description that will be truncated to demonstrate the custom truncation function...\n        "
+      }
+    ]
+  },
+  "template_validation": {
+    "web_search.md": "{'valid': True, 'errors': [], 'warnings': []}",
+    "data_extraction.yaml": "{'valid': True, 'errors': [], 'warnings': []}",
+    "form_filling.json": "{'valid': True, 'errors': [], 'warnings': []}",
+    "invalid_template": "{'valid': False, 'errors': ['Invalid template syntax in message 1'], 'warnings': []}"
+  },
+  "template_management": {
+    "all_templates": "['data_extraction.yaml', 'example_results.json', 'form_filling.json', 'web_search.md']",
+    "web_templates": "['web_search.md']",
+    "extraction_templates": "['data_extraction.yaml']",
+    "metadata_data_extraction.yaml": {
+      "name": "Data Extraction Template",
+      "description": "Template for extracting structured data from web pages",
+      "version": "2.0",
+      "author": "Assistant",
+      "created_at": null,
+      "tags": [
+        "extraction",
+        "data",
+        "structured"
+      ],
+      "required_variables": [
+        "target_data",
+        "output_format"
+      ],
+      "optional_variables": {
+        "validation_rules": [],
+        "field_mappings": {},
+        "error_handling": "strict"
+      },
+      "template_engine": "TemplateEngine.JINJA2"
+    },
+    "metadata_example_results.json": {
+      "name": "unnamed",
+      "description": "",
+      "version": "1.0",
+      "author": "",
+      "created_at": null,
+      "tags": [],
+      "required_variables": [],
+      "optional_variables": {},
+      "template_engine": "TemplateEngine.JINJA2"
+    }
+  },
+  "advanced_features": {
+    "multi_message": [
+      {
+        "role": "system",
+        "content": "You are starting a conversation about machine learning.\nStyle: Professional\nUser expertise: beginner"
+      },
+      {
+        "role": "user",
+        "content": "Hi, I'm Alex. I'd like to learn about machine learning."
+      },
+      {
+        "role": "assistant",
+        "content": "Hello Alex! I'd be happy to help you learn about machine learning.\n\nLet's start with the basics and work our way up.\n\nWhat specific aspect interests you most?"
+      }
+    ],
+    "global_variables": [
+      {
+        "role": "system",
+        "content": "Generate a sales report for .\n\n**Report Details:**\n- Date: \n- Type: Sales\n- Data points: 4\n\n"
+      },
+      {
+        "role": "user",
+        "content": "Please analyze the following data: ['Q1: $50k', 'Q2: $75k', 'Q3: $60k', 'Q4: $90k']"
+      }
+    ],
+    "caching_performance": "{'first_load': 0.0013189315795898438, 'second_load': 0.0013020038604736328, 'speedup': 1.013001281816517}"
+  },
+  "error_handling": {
+    "missing_vars_error": "Missing required variables: {'user_goal'}",
+    "file_not_found": "True",
+    "syntax_error": "True",
+    "graceful_fallback": [
+      {
+        "role": "system",
+        "content": "Hello User!"
+      }
+    ]
+  },
+  "integration": {
+    "dynamic_templates": "{'analysis': [SystemMessage(content='\\nYou are a data analyst. Analyze the provided d...')], 'creative': [SystemMessage(content='\\nYou are a creative assistant. Help with logo d...')]}",
+    "serialization": "[{'role': 'system', 'content': 'Test message for serialization', 'name': None, 'cache': False}]"
+  }
+}
