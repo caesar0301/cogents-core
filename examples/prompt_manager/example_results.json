@@ -3,7 +3,7 @@
     "simple_prompt": [
       {
         "role": "system",
-        "content": "You are a helpful assistant for web automation. Today is 2025-09-05."
+        "content": "You are a helpful assistant for web automation. Today is 2025-09-06."
       }
     ],
     "markdown_template": [
@@ -160,7 +160,7 @@
         "content": "Please analyze the following data: ['Q1: $50k', 'Q2: $75k', 'Q3: $60k', 'Q4: $90k']"
       }
     ],
-    "caching_performance": "{'first_load': 0.0013189315795898438, 'second_load': 0.0013020038604736328, 'speedup': 1.013001281816517}"
+    "caching_performance": "{'first_load': 0.0013020038604736328, 'second_load': 0.0012650489807128906, 'speedup': 1.0292122125895213}"
   },
   "error_handling": {
     "missing_vars_error": "Missing required variables: {'user_goal'}",

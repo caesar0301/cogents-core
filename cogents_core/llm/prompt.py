@@ -4,7 +4,7 @@ Independent Prompts Module
 A comprehensive and extensible prompt management system for handling various 
 prompt templates, dynamic variable injection, and multi-format support.
 
-This module is self-contained and doesn't depend on other cogents_wiz modules.
+This module is self-contained and doesn't depend on other cogents_core modules.
 """
 
 import json
@@ -549,56 +549,3 @@ def load_and_render(file_path: Union[str, Path], **variables) -> List[BaseMessag
     """Quick way to load and render a prompt file"""
     manager = PromptManager()
     return manager.render_prompt(file_path, variables)
-
-
-# ============================================================================
-# Compatibility Layer (Optional)
-# ============================================================================
-
-
-def convert_to_cogents_messages(messages: List[BaseMessage]) -> List[BaseMessage]:
-    """
-    Convert messages to cogents_wiz.bu format if needed.
-
-    This function can be used when integrating with existing cogents_wiz code
-    that expects the bu.llm.messages format. Since the message structures are
-    compatible, this is mostly a pass-through function.
-    """
-    # If cogents_wiz.bu modules are available, you could convert here
-    # For now, just return as-is since the structures are compatible
-    return messages
-
-
-def create_cogents_compatible_messages(messages: List[BaseMessage]) -> List[Any]:
-    """
-    Create messages compatible with cogents_wiz.bu system.
-
-    Returns the messages in a format that can be used with the existing
-    cogents_wiz agent system.
-    """
-    try:
-        # Try to import cogents_wiz message types
-        from cogents_wiz.bu.llm.messages import AssistantMessage as CogentsAssistantMessage
-        from cogents_wiz.bu.llm.messages import SystemMessage as CogentsSystemMessage
-        from cogents_wiz.bu.llm.messages import UserMessage as CogentsUserMessage
-
-        cogents_messages = []
-        for msg in messages:
-            if isinstance(msg, SystemMessage):
-                cogents_msg = CogentsSystemMessage(content=msg.content, name=msg.name, cache=msg.cache)
-            elif isinstance(msg, UserMessage):
-                cogents_msg = CogentsUserMessage(content=msg.content, name=msg.name)
-            elif isinstance(msg, AssistantMessage):
-                cogents_msg = CogentsAssistantMessage(
-                    content=msg.content, name=msg.name, refusal=msg.refusal, tool_calls=msg.tool_calls
-                )
-            else:
-                cogents_msg = msg
-
-            cogents_messages.append(cogents_msg)
-
-        return cogents_messages
-
-    except ImportError:
-        # If cogents_wiz modules not available, return as-is
-        return messages
