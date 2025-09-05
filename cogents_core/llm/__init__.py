@@ -62,9 +62,11 @@ def get_llm_client(
     provider: str = os.getenv("COGENTS_LLM_PROVIDER", "openai"),
     base_url: Optional[str] = None,
     api_key: Optional[str] = None,
-    instructor: bool = False,
+    instructor: bool = False,  # Deprecated by structured_output
+    structured_output: bool = False,
     chat_model: Optional[str] = None,
     vision_model: Optional[str] = None,
+    embed_model: Optional[str] = None,
     **kwargs,
 ):
     """
@@ -75,8 +77,10 @@ def get_llm_client(
         base_url: Base URL for API (used by openai and ollama providers)
         api_key: API key for authentication (used by openai and openrouter providers)
         instructor: Whether to enable instructor for structured output
+        structured_output: Whether to enable structured output
         chat_model: Model to use for chat completions
         vision_model: Model to use for vision tasks
+        embed_model: Model to use for embeddings
         **kwargs: Additional provider-specific arguments:
             - llamacpp: model_path, n_ctx, n_gpu_layers, etc.
             - others: depends on provider
@@ -91,18 +95,20 @@ def get_llm_client(
         return OpenRouterLLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=instructor,
+            instructor=structured_output,
             chat_model=chat_model,
             vision_model=vision_model,
+            embed_model=embed_model,
             **kwargs,
         )
     elif provider == "openai":
         return OpenAILLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=instructor,
+            instructor=structured_output,
             chat_model=chat_model,
             vision_model=vision_model,
+            embed_model=embed_model,
             **kwargs,
         )
     elif provider == "ollama":
@@ -111,27 +117,30 @@ def get_llm_client(
         return OllamaLLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=instructor,
+            instructor=structured_output,
             chat_model=chat_model,
             vision_model=vision_model,
+            embed_model=embed_model,
             **kwargs,
         )
     elif provider == "llamacpp":
         if not LLAMACPP_AVAILABLE:
             raise ValueError("llamacpp provider is not available. Please install the required dependencies.")
         return LlamaCppLLMClient(
-            instructor=instructor,
+            instructor=structured_output,
             chat_model=chat_model,
             vision_model=vision_model,
+            embed_model=embed_model,
             **kwargs,
         )
     elif provider == "litellm":
         return LitellmLLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=instructor,
+            instructor=structured_output,
             chat_model=chat_model,
             vision_model=vision_model,
+            embed_model=embed_model,
             **kwargs,
         )
     else:
@@ -147,6 +156,7 @@ def get_llm_client_instructor(
     api_key: Optional[str] = None,
     chat_model: Optional[str] = None,
     vision_model: Optional[str] = None,
+    embed_model: Optional[str] = None,
     **kwargs,
 ):
     """
@@ -158,6 +168,7 @@ def get_llm_client_instructor(
         api_key: API key for authentication (used by openai and openrouter providers)
         chat_model: Model to use for chat completions
         vision_model: Model to use for vision tasks
+        embed_model: Model to use for embeddings
         **kwargs: Additional provider-specific arguments:
             - llamacpp: model_path, n_ctx, n_gpu_layers, etc.
             - others: depends on provider
@@ -173,7 +184,9 @@ def get_llm_client_instructor(
         base_url=base_url,
         api_key=api_key,
         instructor=True,
+        structured_output=True,
         chat_model=chat_model,
         vision_model=vision_model,
+        embed_model=embed_model,
         **kwargs,
     )

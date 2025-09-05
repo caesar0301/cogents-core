@@ -24,10 +24,10 @@ Installation:
     ollama pull gemma3:4b
 
 Usage:
+    cp env.ollama .env
     python examples/ollama_demo.py
 """
 
-import os
 import sys
 import time
 from pathlib import Path
@@ -432,22 +432,10 @@ def main():
     print("🦙 Ollama Demo for Cogents")
     print("=" * 50)
 
-    # Configuration
-    base_url = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-    chat_model = os.getenv("OLLAMA_CHAT_MODEL", "gemma3:4b")
-    vision_model = os.getenv("OLLAMA_VISION_MODEL", "gemma3:4b")
-
-    logger.info(f"🔗 Ollama URL: {base_url}")
-    logger.info(f"💬 Chat Model: {chat_model}")
-    logger.info(f"👁️ Vision Model: {vision_model}")
-
     try:
         # Initialize client
         client = LLMClient(
-            base_url=base_url,
-            chat_model=chat_model,
-            vision_model=vision_model,
-            instructor=True,  # Enable structured output
+            instructor=True,
         )
 
         # Check connection first

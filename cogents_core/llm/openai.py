@@ -70,6 +70,7 @@ class LLMClient(BaseLLMClient):
             instructor: Whether to enable instructor for structured output
             chat_model: Model to use for chat completions (defaults to gpt-3.5-turbo)
             vision_model: Model to use for vision tasks (defaults to gpt-4-vision-preview)
+            embed_model: Model to use for embeddings (defaults to text-embedding-3-small)
             **kwargs: Additional arguments to pass to the LLM client
         """
         # Configure Opik tracing for observability only if enabled
@@ -102,7 +103,7 @@ class LLMClient(BaseLLMClient):
         # Model configurations
         self.chat_model = chat_model or os.getenv("OPENAI_CHAT_MODEL", "gpt-3.5-turbo")
         self.vision_model = vision_model or os.getenv("OPENAI_VISION_MODEL", "gpt-4-vision-preview")
-        self.embed_model = embed_model or os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small")
+        self.embed_model = embed_model or os.getenv("OPENAI_EMBED_MODEL", "text-embedding-3-small")
 
         # Initialize instructor if requested
         self.instructor = None

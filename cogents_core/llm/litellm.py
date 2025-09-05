@@ -84,7 +84,7 @@ class LLMClient(BaseLLMClient):
         # Model configurations
         self.chat_model = chat_model or os.getenv("LITELLM_CHAT_MODEL", "gpt-3.5-turbo")
         self.vision_model = vision_model or os.getenv("LITELLM_VISION_MODEL", "gpt-4-vision-preview")
-        self.embed_model = embed_model or os.getenv("LITELLM_EMBEDDING_MODEL", "text-embedding-ada-002")
+        self.embed_model = embed_model or os.getenv("LITELLM_EMBED_MODEL", "text-embedding-ada-002")
 
         # Initialize instructor if requested
         self.instructor = None

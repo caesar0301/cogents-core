@@ -17,7 +17,7 @@ class TestToolkitConfig:
         assert config.name is None
         assert config.activated_tools is None
         assert config.config == {}
-        assert config.llm_provider == "openrouter"
+        assert config.llm_provider == "openai"
         assert config.llm_model is None
         assert config.llm_config == {}
 

@@ -16,12 +16,10 @@ from typing import Any, Dict, List, Optional, Type, TypeVar, Union
 import ollama
 from instructor import Instructor, Mode, patch
 
-from cogents_core.consts import OLLAMA_EMBEDDING_MODEL, OLLAMA_GENERATIVE_MODEL
 from cogents_core.llm.base import BaseLLMClient
 from cogents_core.tracing import estimate_token_usage, get_token_tracker
+from cogents_core.tracing.opik_tracing import configure_opik
 from cogents_core.utils.logging_config import get_logger
-
-from .opik_tracing import configure_opik
 
 # Only import OPIK if tracing is enabled
 OPIK_AVAILABLE = False
@@ -78,9 +76,9 @@ class LLMClient(BaseLLMClient):
         self.client = ollama.Client(host=self.base_url)
 
         # Model configurations
-        self.chat_model = chat_model or os.getenv("OLLAMA_CHAT_MODEL", OLLAMA_GENERATIVE_MODEL)
-        self.vision_model = vision_model or os.getenv("OLLAMA_VISION_MODEL", OLLAMA_GENERATIVE_MODEL)
-        self.embed_model = embed_model or os.getenv("OLLAMA_EMBED_MODEL", OLLAMA_EMBEDDING_MODEL)
+        self.chat_model = chat_model or os.getenv("OLLAMA_CHAT_MODEL", "gemma3:4b")
+        self.vision_model = vision_model or os.getenv("OLLAMA_VISION_MODEL", "gemma3:4b")
+        self.embed_model = embed_model or os.getenv("OLLAMA_EMBED_MODEL", "nomic-embed-text:latest")
 
         # Initialize instructor if requested
         self.instructor = None
