@@ -18,8 +18,8 @@ from instructor import Instructor, Mode, patch
 
 from cogents_core.consts import OLLAMA_EMBEDDING_MODEL, OLLAMA_GENERATIVE_MODEL
 from cogents_core.llm.base import BaseLLMClient
-from cogents_core.logging_config import get_logger
 from cogents_core.tracing import estimate_token_usage, get_token_tracker
+from cogents_core.utils.logging_config import get_logger
 
 from .opik_tracing import configure_opik
 

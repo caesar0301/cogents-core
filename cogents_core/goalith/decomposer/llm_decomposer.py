@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field
 from cogents_core.goalith.errors import DecompositionError
 from cogents_core.goalith.goalgraph.node import GoalNode
 from cogents_core.llm import get_llm_client_instructor
-from cogents_core.logging_config import get_logger
+from cogents_core.utils.logging_config import get_logger
 
 from .base import GoalDecomposer
 from .prompts import get_decomposition_system_prompt, get_decomposition_user_prompt, get_fallback_prompt

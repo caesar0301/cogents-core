@@ -3,9 +3,9 @@
 import math
 import re
 
-from cogents_core.logging_config import get_logger
 from cogents_core.routing.base import BaseRoutingStrategy
 from cogents_core.routing.types import ComplexityScore, ModelTier, RoutingResult
+from cogents_core.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 

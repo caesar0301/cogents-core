@@ -46,7 +46,7 @@ from pydantic import BaseModel, Field
 from cogents_core.llm.litellm import LLMClient as LiteLLMClient
 from cogents_core.llm.ollama import LLMClient as OllamaClient
 from cogents_core.llm.openai import LLMClient as OpenAIClient
-from cogents_core.logging_config import get_logger, setup_logging
+from cogents_core.utils.logging_config import get_logger, setup_logging
 
 from .opik_tracing import configure_opik, get_opik_project, is_opik_enabled
 

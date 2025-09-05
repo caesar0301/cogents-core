@@ -7,7 +7,7 @@ sys.path.insert(0, str(project_root))
 
 import requests  # Example third-party lib
 
-from cogents_core.logging_config import get_logger, setup_logging
+from cogents_core.utils.logging_config import get_logger, setup_logging
 
 
 def main():

@@ -1,13 +1,21 @@
 import os
 from typing import Optional
 
+from deprecated import deprecated
+
 from .base import BaseLLMClient
+
+# Deprecated imports
+from .litellm import LLMClient as LitellmClient
 from .litellm import LLMClient as LitellmLLMClient
+from .openai import LLMClient as OpenAIClient
 from .openai import LLMClient as OpenAILLMClient
+from .openrouter import LLMClient as OpenRouterClient
 from .openrouter import LLMClient as OpenRouterLLMClient
 
 # Optional import - llamacpp might not be available
 try:
+    from .llamacpp import LLMClient as LlamaCppClient
     from .llamacpp import LLMClient as LlamaCppLLMClient
 
     LLAMACPP_AVAILABLE = True
@@ -17,6 +25,7 @@ except ImportError:
 
 # Optional import - ollama might not be available
 try:
+    from .ollama import LLMClient as OllamaClient
     from .ollama import LLMClient as OllamaLLMClient
 
     OLLAMA_AVAILABLE = True
@@ -27,12 +36,21 @@ except ImportError:
 
 __all__ = [
     "BaseLLMClient",
+    # -- Deprecated imports --
+    "LitellmLLMClient",
     "LlamaCppLLMClient",
     "OpenRouterLLMClient",
     "OllamaLLMClient",
     "OpenAILLMClient",
+    # -- New imports --
+    "LitellmClient",
+    "LlamaCppClient",
+    "OllamaClient",
+    "OpenAIClient",
+    "OpenRouterClient",
+    # -- Common functions --
     "get_llm_client",
-    "get_llm_client_instructor",
+    "get_llm_client_instructor",  # Deprecated
 ]
 
 #############################
@@ -122,6 +140,7 @@ def get_llm_client(
         )
 
 
+@deprecated("Use get_llm_client with instructor=True instead")
 def get_llm_client_instructor(
     provider: str = os.getenv("COGENTS_LLM_PROVIDER", "openai"),
     base_url: Optional[str] = None,

@@ -14,8 +14,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from cogents_core.llm import get_llm_client
-from cogents_core.logging_config import get_logger
 from cogents_core.tracing import TokenUsageCallback, get_token_tracker
+from cogents_core.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 

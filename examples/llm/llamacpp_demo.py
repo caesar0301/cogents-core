@@ -23,8 +23,8 @@ from typing import Optional
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from cogents_core.llm.llamacpp import LLMClient
-from cogents_core.logging_config import get_logger, setup_logging
 from cogents_core.tracing import get_token_tracker
+from cogents_core.utils.logging_config import get_logger, setup_logging
 
 logger = get_logger(__name__)
 
