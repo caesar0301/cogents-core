@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ollama Demo for CogentNano
+Ollama Demo for Cogents
 
 This demo showcases the Ollama client capabilities including:
 - Basic chat completion with local models
@@ -429,7 +429,7 @@ def main():
     """Main demo function."""
     logger = setup_demo_logging()
 
-    print("🦙 Ollama Demo for CogentNano")
+    print("🦙 Ollama Demo for Cogents")
     print("=" * 50)
 
     # Configuration

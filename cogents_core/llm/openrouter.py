@@ -1,5 +1,5 @@
 """
-LLM utilities for CogentNano using OpenRouter via OpenAI SDK.
+LLM utilities for Cogents using OpenRouter via OpenAI SDK.
 
 This module provides:
 - Chat completion using various models via OpenRouter

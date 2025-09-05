@@ -1,5 +1,5 @@
 """
-LLM utilities for CogentNano using OpenAI-compatible APIs.
+LLM utilities for Cogents using OpenAI-compatible APIs.
 
 This module provides:
 - Chat completion using various models via OpenAI-compatible endpoints

@@ -1,5 +1,5 @@
 """
-LiteLLM provider for CogentNano.
+LiteLLM provider for Cogents.
 
 This module provides:
 - Unified interface to multiple LLM providers via LiteLLM

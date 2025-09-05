@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Opik Tracing Example for CogentNano
+Opik Tracing Example for Cogents
 
-This example demonstrates how to use Opik tracing with the CogentNano LLM clients.
+This example demonstrates how to use Opik tracing with the Cogents LLM clients.
 Opik provides comprehensive observability and monitoring for LLM applications.
 
 Requirements:
@@ -72,7 +72,7 @@ def check_opik_configuration(logger):
     """Check and display Opik configuration status."""
     logger.info("🔍 Checking Opik configuration...")
 
-    # Check global CogentNano toggle first
+    # Check global Cogents toggle first
     cogents_opik_enabled = os.getenv("COGENTS_OPIK_TRACING", "false").lower() == "true"
 
     if not cogents_opik_enabled:
@@ -233,7 +233,7 @@ def main():
     """Main demo function."""
     logger = setup_demo_logging()
 
-    print("🔍 Opik Tracing Demo for CogentNano")
+    print("🔍 Opik Tracing Demo for Cogents")
     print("=" * 50)
 
     # Check Opik configuration

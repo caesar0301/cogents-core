@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-LiteLLM Demo for CogentNano
+LiteLLM Demo for Cogents
 
 This demo showcases the LiteLLM client capabilities including:
 - Basic chat completion
@@ -311,7 +311,7 @@ def main():
     """Main demo function."""
     logger = setup_demo_logging()
 
-    print("🎯 LiteLLM Demo for CogentNano")
+    print("🎯 LiteLLM Demo for Cogents")
     print("=" * 50)
 
     # Check for API keys

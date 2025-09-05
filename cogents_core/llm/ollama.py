@@ -1,5 +1,5 @@
 """
-Ollama LLM provider for CogentNano.
+Ollama LLM provider for Cogents.
 
 This module provides:
 - Chat completion using Ollama models

@@ -2,7 +2,7 @@
 Opik tracing configuration for observability of LLM communications.
 
 This module configures Opik tracing to monitor and analyze
-all LLM interactions in the CogentNano application.
+all LLM interactions in the Cogents application.
 """
 
 import logging
@@ -30,7 +30,7 @@ def configure_opik() -> bool:
         bool: True if Opik was successfully configured, False otherwise
     """
     try:
-        # Check global CogentNano Opik tracing toggle first
+        # Check global Cogents Opik tracing toggle first
         cogents_opik_enabled = os.getenv("COGENTS_OPIK_TRACING", "false").lower() == "true"
 
         if not cogents_opik_enabled:
@@ -87,7 +87,7 @@ def is_opik_enabled() -> bool:
         bool: True if Opik tracing is enabled, False otherwise
     """
     try:
-        # Check global CogentNano Opik tracing toggle first
+        # Check global Cogents Opik tracing toggle first
         cogents_opik_enabled = os.getenv("COGENTS_OPIK_TRACING", "false").lower() == "true"
 
         if not cogents_opik_enabled:
