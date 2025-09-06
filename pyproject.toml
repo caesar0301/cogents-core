@@ -50,8 +50,6 @@ langgraph = "^0.5.4"
 networkx = "^3.5"
 # MCP support
 mcp = "^1.0.0"
-# Agentic graph visualization
-pygraphviz = "^1.14"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=8.2,<9"
