@@ -21,7 +21,7 @@ from instructor import Instructor, Mode, patch
 
 from cogents_core.llm.base import BaseLLMClient
 from cogents_core.tracing import configure_opik, estimate_token_usage, get_token_tracker, is_opik_enabled
-from cogents_core.utils.logging_config import get_logger
+from cogents_core.utils.logging import get_logger
 
 # Only import OPIK if tracing is enabled
 OPIK_AVAILABLE = False

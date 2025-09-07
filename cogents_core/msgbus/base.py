@@ -11,7 +11,7 @@ from typing import Any, ClassVar, Generic, Protocol, TypeVar
 from bubus import BaseEvent, EventBus
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from cogents_core.utils.logging_config import color_text
+from cogents_core.utils.logging import color_text
 
 # Generic type for the event processor
 TEventProcessor = TypeVar("TEventProcessor", bound="EventProcessor")

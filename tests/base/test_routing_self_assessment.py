@@ -107,7 +107,7 @@ class TestSelfAssessmentStrategy:
         ]
 
         for response in test_cases:
-            with patch("cogents_core.logging_config.get_logger") as mock_logger:
+            with patch("cogents_core.utils.logging.get_logger") as mock_logger:
                 score, confidence = strategy._parse_assessment_response(response)
                 assert score == 3  # Default fallback
                 assert confidence == 0.3  # Low confidence
@@ -185,7 +185,7 @@ class TestSelfAssessmentStrategy:
         assert messages[0]["role"] == "user"
         assert query in messages[0]["content"]
 
-    @patch("cogents_core.logging_config.get_logger")
+    @patch("cogents_core.utils.logging.get_logger")
     def test_route_exception_handling(self, mock_logger, strategy):
         """Test route method exception handling."""
         # Make the LLM client raise an exception

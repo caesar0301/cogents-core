@@ -34,7 +34,7 @@ from pydantic import BaseModel, Field
 
 from cogents_core.llm.litellm import LLMClient
 from cogents_core.tracing import get_token_tracker
-from cogents_core.utils.logging_config import get_logger, setup_logging
+from cogents_core.utils.logging import get_logger, setup_logging
 
 
 class PersonalityAnalysis(BaseModel):

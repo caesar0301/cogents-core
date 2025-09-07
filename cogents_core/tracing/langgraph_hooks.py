@@ -6,7 +6,7 @@ from langchain_core.callbacks import BaseCallbackHandler
 from langchain_core.outputs import LLMResult
 
 from cogents_core.tracing.token_tracker import get_token_tracker
-from cogents_core.utils.logging_config import color_text, get_logger
+from cogents_core.utils.logging import color_text, get_logger
 
 logger = get_logger(__name__)
 

@@ -45,7 +45,7 @@ from pydantic import BaseModel, Field
 
 from cogents_core.llm import get_llm_client
 from cogents_core.tracing import get_token_tracker
-from cogents_core.utils.logging_config import get_logger, setup_logging
+from cogents_core.utils.logging import get_logger, setup_logging
 
 
 class TextAnalysis(BaseModel):

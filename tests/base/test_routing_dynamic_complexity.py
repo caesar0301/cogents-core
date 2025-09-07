@@ -71,7 +71,7 @@ class TestDynamicComplexityStrategy:
         """Test that weights are normalized if they don't sum to 1.0."""
         config = {"alpha": 0.6, "beta": 0.4, "gamma": 0.2}  # These sum to 1.2, should be normalized
 
-        with patch("cogents_core.logging_config.get_logger") as mock_logger:
+        with patch("cogents_core.utils.logging.get_logger") as mock_logger:
             strategy = DynamicComplexityStrategy(lite_client=mock_llm_client, config=config)
 
             # Weights should be normalized
@@ -115,7 +115,7 @@ class TestDynamicComplexityStrategy:
     def test_calculate_linguistic_score_error_handling(self, strategy_with_client):
         """Test linguistic score error handling."""
         with patch("re.findall", side_effect=Exception("Regex error")):
-            with patch("cogents_core.logging_config.get_logger"):
+            with patch("cogents_core.utils.logging.get_logger"):
                 score = strategy_with_client._calculate_linguistic_score("test")
                 assert score == 0.5  # Fallback value
 
@@ -133,7 +133,7 @@ class TestDynamicComplexityStrategy:
         """Test reasoning score with invalid LLM response."""
         strategy_with_client.lite_client.completion.return_value = "invalid"
 
-        with patch("cogents_core.logging_config.get_logger"):
+        with patch("cogents_core.utils.logging.get_logger"):
             score = strategy_with_client._calculate_reasoning_score("test query")
 
         # Should fall back to keyword-based scoring
@@ -308,7 +308,7 @@ class TestDynamicComplexityStrategy:
         confidence = strategy_with_client._calculate_confidence(0.1, 0.9, 0.5)
         assert confidence < 0.8
 
-    @patch("cogents_core.logging_config.get_logger")
+    @patch("cogents_core.utils.logging.get_logger")
     def test_route_exception_handling(self, mock_logger, strategy_with_client):
         """Test route method exception handling."""
         # Make linguistic score calculation fail

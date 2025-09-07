@@ -2,7 +2,7 @@
 Simplified logging configuration for cogents with color support.
 
 Usage:
-    from cogents_core.utils.logging_config import setup_logging, get_logger
+    from cogents_core.utils.logging import setup_logging, get_logger
 
     # Basic usage - automatically uses environment variables if available
     setup_logging()

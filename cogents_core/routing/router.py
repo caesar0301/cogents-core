@@ -4,7 +4,7 @@ from typing import Any, Dict, Optional, Type, Union
 
 from cogents_core.llm import get_llm_client
 from cogents_core.llm.base import BaseLLMClient
-from cogents_core.utils.logging_config import get_logger
+from cogents_core.utils.logging import get_logger
 
 from .base import BaseRoutingStrategy
 from .strategies import DynamicComplexityStrategy, SelfAssessmentStrategy

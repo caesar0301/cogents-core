@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from cogents_core.utils.logging_config import color_text, get_logger
+from cogents_core.utils.logging import color_text, get_logger
 
 logger = get_logger(__name__)
 

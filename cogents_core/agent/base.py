@@ -9,8 +9,8 @@ from pydantic import BaseModel, Field
 
 from cogents_core.llm import get_llm_client_instructor
 from cogents_core.tracing import get_token_tracker
-from cogents_core.utils.logging_config import get_logger
-from cogents_core.utils.typing_compat import override
+from cogents_core.utils.logging import get_logger
+from cogents_core.utils.typing import override
 
 
 class BaseAgent(ABC):

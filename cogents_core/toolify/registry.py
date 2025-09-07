@@ -4,7 +4,7 @@ Toolkit registry for managing and discovering available toolkits.
 
 from typing import Dict, List, Optional, Type, Union
 
-from cogents_core.utils.logging_config import get_logger
+from cogents_core.utils.logging import get_logger
 
 from .base import AsyncBaseToolkit, BaseToolkit
 from .config import ToolkitConfig

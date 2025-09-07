@@ -12,7 +12,7 @@ from typing import Any, Callable, Dict, List, Optional, Union
 from langchain_core.tools import BaseTool, tool
 
 from cogents_core.llm import BaseLLMClient
-from cogents_core.utils.logging_config import get_logger
+from cogents_core.utils.logging import get_logger
 
 from .config import ToolkitConfig
 

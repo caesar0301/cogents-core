@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "cogents-core"
-version = "0.1.7"
+version = "0.1.8"
 description = "Towards a cognitive agentic framework"
 readme = "README.md"
 license = "MIT"

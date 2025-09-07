@@ -135,7 +135,7 @@ class TestModelRouter:
         with patch("cogents_core.routing.router.get_llm_client") as mock_get_client:
             mock_get_client.side_effect = Exception("All providers failed")
 
-            with patch("cogents_core.logging_config.get_logger"):
+            with patch("cogents_core.utils.logging.get_logger"):
                 router = ModelRouter()
 
                 assert router.lite_client is None
@@ -201,7 +201,7 @@ class TestModelRouter:
             assert result.tier == ModelTier.FAST
             assert "empty_query" not in result.metadata
 
-    @patch("cogents_core.logging_config.get_logger")
+    @patch("cogents_core.utils.logging.get_logger")
     def test_route_strategy_exception(self, mock_logger):
         """Test route method when strategy raises exception."""
 
