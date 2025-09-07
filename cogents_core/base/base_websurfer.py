@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Union
 
+from deprecated import deprecated
 from pydantic import BaseModel
 
 
@@ -12,6 +13,7 @@ class ObserveResult(BaseModel):
     arguments: List[str]  # Method arguments for the suggested interaction
 
 
+@deprecated("Use cogents_tools instead")
 class BaseWebPage(ABC):
     @abstractmethod
     async def navigate(self, url: str, **kwargs) -> None:

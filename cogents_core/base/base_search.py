@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, List, Optional
 
+from deprecated import deprecated
 from pydantic import BaseModel, ConfigDict, Field
 
 
@@ -33,6 +34,7 @@ class SearchResult(BaseModel):
     model_config = ConfigDict(extra="forbid", arbitrary_types_allowed=True)
 
 
+@deprecated("Use cogents_tools.integrations.web_search instead")
 class BaseSearch(ABC):
     """
     Abstract base class for web search engines.

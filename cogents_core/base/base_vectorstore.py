@@ -8,6 +8,7 @@ Licensed under the Apache License, Version 2.0
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 
+from deprecated import deprecated
 from pydantic import BaseModel
 
 
@@ -19,6 +20,7 @@ class OutputData(BaseModel):
     payload: Dict[str, Any]
 
 
+@deprecated("Use cogents_tools.integrations.vector_store instead")
 class BaseVectorStore(ABC):
     def __init__(self, embedding_model_dims: int):
         """
