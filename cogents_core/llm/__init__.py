@@ -91,6 +91,9 @@ def get_llm_client(
     Raises:
         ValueError: If provider is not supported or dependencies are missing
     """
+    if instructor:
+        structured_output = True
+
     if provider == "openrouter":
         return OpenRouterLLMClient(
             base_url=base_url,

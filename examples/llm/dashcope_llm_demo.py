@@ -31,7 +31,6 @@ Usage:
 
 import os
 import sys
-import time
 from pathlib import Path
 from typing import List
 
@@ -183,52 +182,6 @@ def demo_structured_completion(client, logger):
     except Exception as e:
         logger.error(f"❌ Structured completion failed: {e}")
         logger.info("💡 Note: Structured completion requires instructor integration")
-        return False
-
-
-def demo_product_recommendation(client, logger):
-    """Demonstrate product recommendation with structured output."""
-    logger.info("🛍️ Testing product recommendation...")
-
-    messages = [
-        {
-            "role": "system",
-            "content": "You are a knowledgeable product advisor with expertise in consumer electronics and technology products.",
-        },
-        {
-            "role": "user",
-            "content": """
-            I'm looking for a smartphone recommendation with these requirements:
-            - Budget: $500-800
-            - Good camera for photography
-            - Long battery life
-            - 5G support
-            - Android or iOS (no preference)
-            - Will be used for work and personal use
-            """,
-        },
-    ]
-
-    try:
-        recommendation = client.structured_completion(
-            messages=messages, response_model=ProductRecommendation, temperature=0.6, max_tokens=1000
-        )
-
-        logger.info("✅ Product recommendation successful!")
-        print(f"\n📱 Smartphone Recommendation:")
-        print(f"Product: {recommendation.product_name}")
-        print(f"Category: {recommendation.category}")
-        print(f"Price Range: {recommendation.price_range}")
-        print(f"Key Features: {', '.join(recommendation.key_features)}")
-        print(f"Pros: {', '.join(recommendation.pros)}")
-        print(f"Cons: {', '.join(recommendation.cons)}")
-        print(f"Target Audience: {recommendation.target_audience}")
-        print(f"Alternatives: {', '.join(recommendation.alternatives)}")
-        print(f"Recommendation Score: {recommendation.recommendation_score:.2f}\n")
-        return True
-
-    except Exception as e:
-        logger.error(f"❌ Product recommendation failed: {e}")
         return False
 
 
@@ -403,47 +356,6 @@ def demo_streaming_completion(client, logger):
         return False
 
 
-def demo_performance_benchmark(client, logger):
-    """Demonstrate performance characteristics of DashScope models."""
-    logger.info("⚡ Testing model performance...")
-
-    test_prompts = [
-        "Explain quantum computing in simple terms.",
-        "Write a Python function to calculate fibonacci numbers.",
-        "Translate 'Hello, how are you?' to 5 different languages.",
-    ]
-
-    results = []
-
-    try:
-        for i, prompt in enumerate(test_prompts, 1):
-            messages = [{"role": "user", "content": prompt}]
-
-            start_time = time.time()
-            response = client.completion(messages=messages, temperature=0.5, max_tokens=200)
-            end_time = time.time()
-
-            response_time = end_time - start_time
-            results.append(response_time)
-
-            logger.info(f"✅ Test {i} completed in {response_time:.2f} seconds")
-
-        avg_time = sum(results) / len(results)
-
-        print(f"\n⚡ Performance Results:")
-        print(f"Average Response Time: {avg_time:.2f} seconds")
-        print(f"Fastest Response: {min(results):.2f} seconds")
-        print(f"Slowest Response: {max(results):.2f} seconds")
-        print(f"Total Tests: {len(results)}")
-        print()
-
-        return True
-
-    except Exception as e:
-        logger.error(f"❌ Performance benchmark failed: {e}")
-        return False
-
-
 def demo_error_handling(client, logger):
     """Demonstrate error handling with DashScope parameter validation."""
     logger.info("⚠️ Testing error handling and recovery...")
@@ -525,12 +437,10 @@ def main():
         results.append(demo_basic_completion(client, logger))
         results.append(demo_chinese_completion(client, logger))
         results.append(demo_structured_completion(client, logger))
-        results.append(demo_product_recommendation(client, logger))
         results.append(demo_embeddings(client, logger))
         results.append(demo_reranking(client, logger))
         results.append(demo_vision_understanding(client, logger))
         results.append(demo_streaming_completion(client, logger))
-        results.append(demo_performance_benchmark(client, logger))
         results.append(demo_error_handling(client, logger))
 
         # Print results summary
@@ -550,9 +460,6 @@ def main():
         return
 
     print("🎉 DashScope Demo completed!")
-    print("💡 Check the logs above for detailed results and any issues.")
-    print("🔗 More info: https://dashscope.aliyuncs.com/")
-    print("📚 API Documentation: https://help.aliyun.com/zh/dashscope/")
 
 
 if __name__ == "__main__":
