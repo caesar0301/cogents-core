@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cogents-core"
-version = "0.1.8.2"
+version = "0.1.9"
 description = "Towards a cognitive agentic framework"
 readme = "README.md"
 license = "MIT"
