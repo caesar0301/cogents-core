@@ -2,7 +2,6 @@
 Tests for toolkit configuration system.
 """
 
-
 from cogents_core.toolify.config import ToolkitConfig, create_toolkit_config
 
 

@@ -26,7 +26,7 @@ API Documentation:
 
 Usage:
     cp env.dashscope .env
-    poetry run python examples/llm/dashcope_llm_demo.py
+    python examples/llm/dashcope_llm_demo.py
 """
 
 import os

@@ -1,7 +1,7 @@
 """
 Independent Prompts Module
 
-A comprehensive and extensible prompt management system for handling various 
+A comprehensive and extensible prompt management system for handling various
 prompt templates, dynamic variable injection, and multi-format support.
 
 This module is self-contained and doesn't depend on other cogents_core modules.

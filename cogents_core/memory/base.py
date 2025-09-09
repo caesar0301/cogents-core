@@ -165,7 +165,7 @@ class BaseMemoryStore(ABC):
         offset: Optional[int] = None,
         sort_by: Optional[str] = None,
         sort_order: str = "desc",
-        **kwargs
+        **kwargs,
     ) -> List[MemoryItem]:
         """
         Retrieve multiple memory items with optional filtering and pagination.
@@ -221,7 +221,7 @@ class BaseMemoryStore(ABC):
         threshold: float = 0.7,
         memory_types: Optional[List[str]] = None,
         filters: Optional[MemoryFilter] = None,
-        **kwargs
+        **kwargs,
     ) -> List[SearchResult]:
         """
         Perform semantic search across memory items.
@@ -253,7 +253,7 @@ class BaseMemoryStore(ABC):
         limit: int = 10,
         threshold: float = 0.7,
         filters: Optional[MemoryFilter] = None,
-        **kwargs
+        **kwargs,
     ) -> List[SearchResult]:
         """
         Find memory items similar to a list of reference items.
@@ -307,7 +307,7 @@ class BaseMemoryStore(ABC):
         memory_types: Optional[List[str]] = None,
         preserve_important: bool = True,
         dry_run: bool = True,
-        **kwargs
+        **kwargs,
     ) -> int:
         """
         Clean up old memory items based on age and criteria.
@@ -394,7 +394,7 @@ class BaseMemoryManager(ABC):
         agent_id: Optional[str] = None,
         extract_profiles: bool = True,
         extract_experiences: bool = True,
-        **kwargs
+        **kwargs,
     ) -> Dict[str, List[str]]:
         """
         Extract memories from a conversation and store them.

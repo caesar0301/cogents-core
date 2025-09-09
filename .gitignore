@@ -208,3 +208,4 @@ __marimo__/
 thirdparty/
 vendors/
 full.diff
+uv.lock

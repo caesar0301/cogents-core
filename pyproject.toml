@@ -1,74 +1,80 @@
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry]
+[project]
 name = "cogents-core"
 version = "0.1.8.2"
 description = "Towards a cognitive agentic framework"
 readme = "README.md"
 license = "MIT"
-authors = ["Xiaming Chen <chenxm35@gmail.com>"]
-maintainers = ["Xiaming Chen <chenxm35@gmail.com>"]
+authors = [
+    {name = "Xiaming Chen", email = "chenxm35@gmail.com"}
+]
+maintainers = [
+    {name = "Xiaming Chen", email = "chenxm35@gmail.com"}
+]
 keywords = ["agents", "multi-agent system", "cognition", "artificial intelligence"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-packages = [{include = "cogents_core"}]
+requires-python = ">=3.11"
+dependencies = [
+    # Basic dependencies
+    "pydantic>=2.0.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.1.1",
+    "colorlog>=6.8.0",
+    "typing-extensions>=4.8.0",
+    "deprecated>=1.2.18",
+    "bubus>=1.5.6",  # requires python 3.11+
+    # LLM and AI dependencies
+    "openai>=1.0.0",
+    "instructor>=1.10.0",
+    "google-genai>=1.5.0",
+    "litellm>=1.0.0",
+    "ollama>=0.5.3",
+    "huggingface-hub>=0.34.4",
+    "llama-cpp-python>=0.3.16",
+    # LangChain ecosystem
+    "langchain-core>=0.3.72",
+    "langchain-text-splitters>=0.3.0",
+    "langchain-ollama>=0.2.0",
+    "langgraph>=0.5.4",
+    # Orchestration
+    "networkx>=3.5",
+    # MCP support
+    "mcp>=1.0.0",
+]
 
-[tool.poetry.dependencies]
-# Basic dependencies
-python = "^3.11"
-pydantic = "^2.0.0"
-requests = "^2.31.0"
-python-dotenv = "^1.1.1"
-colorlog = "^6.8.0"
-typing-extensions = "^4.8.0"
-deprecated = "^1.2.18"
-bubus = "^1.5.6" # requires python 3.11+
-# LLM and AI dependencies
-openai = "^1.0.0"
-instructor = "^1.10.0"
-google-genai = "^1.5.0"
-litellm = "^1.0.0"
-ollama = "^0.5.3"
-huggingface-hub = "^0.34.4"
-llama-cpp-python = "^0.3.16"
-# LangChain ecosystem
-langchain-core = "^0.3.72"
-langchain-text-splitters = "^0.3.0"
-langchain-ollama = "^0.2.0"
-langgraph = "^0.5.4"
-# Orchestration
-networkx = "^3.5"
-# MCP support
-mcp = "^1.0.0"
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2,<9",
+    "pytest-cov>=4.0.0",
+    "pytest-asyncio>=1.1.0",
+    "pytest-tornasync>=0.6.0.post2",
+    "pytest-trio>=0.8.0",
+    "pytest-twisted>=1.14.3",
+    "twisted>=25.5.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=7.3.0",
+    "autoflake>=2.3.1",
+    "pillow>=11.3.0",  # Optional dependency for image understanding
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = ">=8.2,<9"
-pytest-cov = "^4.0.0"
-pytest-asyncio = "^1.1.0"
-pytest-tornasync = "^0.6.0.post2"
-pytest-trio = "^0.8.0"
-pytest-twisted = "^1.14.3"
-twisted = "^25.5.0"
-black = "^23.0.0"
-isort = "^5.12.0"
-flake8 = "^7.3.0"
-autoflake = "^2.3.1"
-pillow = "^11.3.0" # Optional dependency for image understanding
-
-[tool.poetry.urls]
+[project.urls]
 Homepage = "https://github.com/mirasurf/cogents-core"
-Documentation = "https://cogents-core.readthedocs.io/"
 Repository = "https://github.com/mirasurf/cogents-core"
+
+[tool.setuptools.packages.find]
+include = ["cogents_core*"]
 
 [tool.black]
 line-length = 120

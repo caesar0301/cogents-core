@@ -105,20 +105,20 @@ cogents/
 
 ### Python Command Execution
 
-- **Always use `poetry run` for Python commands in development**
-  - Use `poetry run python script.py` instead of `python script.py`
-  - Use `poetry run pytest` instead of `pytest`
-  - Use `poetry run python -m module` instead of `python -m module`
+- **Always use `uv run` for Python commands in development**
+  - Use `uv run python script.py` instead of `python script.py`
+  - Use `uv run pytest` instead of `pytest`
+  - Use `uv run python -m module` instead of `python -m module`
   - This ensures proper dependency management and virtual environment isolation
 
 ## Examples
 
 ```bash
 # ✅ Correct
-poetry run python examples/base/llamacpp_demo.py
-poetry run python examples/goalith/goalith_decomposer_example.py
-poetry run pytest tests/
-poetry run python -m cogents_core.example
+uv run python examples/base/llamacpp_demo.py
+uv run python examples/goalith/goalith_decomposer_example.py
+uv run pytest tests/
+uv run python -m cogents_core.example
 
 # ❌ Incorrect
 python examples/base/llamacpp_demo.py
@@ -189,9 +189,9 @@ For llamacpp provider, you can set:
 - Use `make test-unit` to run unit tests
 - Use `make test-integration` to run integration tests
 - Use `make test` to run all tests
-- Use `poetry run pytest tests/` to run all tests (manual)
-- Use `poetry run pytest -m integration` for integration tests only (manual)
-- Use `poetry run pytest -m "not slow"` to skip slow tests (manual)
+- Use `uv run pytest tests/` to run all tests (manual)
+- Use `uv run pytest -m integration` for integration tests only (manual)
+- Use `uv run pytest -m "not slow"` to skip slow tests (manual)
 
 ### Test Classification Rules
 
@@ -237,10 +237,10 @@ async def test_get_image_info_success(self, image_toolkit):
 
 ## Development Environment Tips
 
-- Use `poetry install` to install dependencies
-- Use `poetry shell` to activate the virtual environment
-- Use `poetry add <package>` to add new dependencies
-- Use `poetry update` to update existing dependencies
+- Use `uv sync` to install dependencies
+- Use `uv shell` to activate the virtual environment
+- Use `uv add <package>` to add new dependencies
+- Use `uv sync` to update existing dependencies
 
 ## PR Guidelines
 
@@ -285,8 +285,9 @@ This ensures that `env.example` files are accurate and only show variables that 
 
 ## Rationale
 
-Using `poetry run` ensures:
+Using `uv run` ensures:
 - Consistent dependency versions across development environments
 - Proper virtual environment activation
 - Access to all project dependencies
 - Isolation from system Python packages
+- Faster dependency resolution and installation

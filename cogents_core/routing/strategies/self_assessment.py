@@ -1,6 +1,5 @@
 """Self-assessment routing strategy implementation."""
 
-
 from cogents_core.routing.base import BaseRoutingStrategy
 from cogents_core.routing.types import ComplexityScore, ModelTier, RoutingResult
 from cogents_core.utils.logging import get_logger

@@ -1,6 +1,6 @@
 """Base watchdog class for general event monitoring components.
- 
-This is a generic watchdog class that can be used with any event processor that 
+
+This is a generic watchdog class that can be used with any event processor that
 implements the EventProcessor protocol. Derived from browser-use BaseWatchdog.
 """
 

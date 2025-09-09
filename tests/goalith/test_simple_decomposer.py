@@ -2,7 +2,6 @@
 Unit tests for SimpleListDecomposer class.
 """
 
-
 from cogents_core.goalith.decomposer.simple_decomposer import SimpleListDecomposer
 from cogents_core.goalith.goalgraph.node import GoalNode, NodeStatus
 

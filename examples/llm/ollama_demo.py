@@ -19,7 +19,7 @@ Requirements:
 Installation:
     # Install Ollama
     curl -fsSL https://ollama.ai/install.sh | sh
-    
+
     # Pull models
     ollama pull gemma3:4b
 
