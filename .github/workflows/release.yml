@@ -1,13 +1,19 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+  id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
 
 jobs:
-  release:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cogents-core
 
     steps:
     - uses: actions/checkout@v4
@@ -27,9 +33,16 @@ jobs:
       run: uv run make test-unit
 
     - name: Build package
-      run: uv run make build
+      run: |
+        uv run make build
+        ls -la dist/
+        if [ ! -f dist/*.whl ] || [ ! -f dist/*.tar.gz ]; then
+          echo "❌ Missing build artifacts"
+          exit 1
+        fi
 
-    - name: Publish to PyPI
-      run: uv publish
-      env:
-        UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
+    - name: Publish package to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        verbose: true
+        print-hash: true
