@@ -4,7 +4,7 @@
 [![PyPI version](https://img.shields.io/pypi/v/cogents-core.svg)](https://pypi.org/project/cogents-core/)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mirasurf/cogents-core)
 
-A comprehensive collection of essential building blocks for constructing cognitive multi-agent systems (MAS). Rather than building a full agent framework, Cogents provides a lightweight repository of key components designed to bridge the final mile in MAS development. Our philosophy focuses on modular, composable components that can be easily integrated into existing systems or used to build new ones from the ground up. For the underlying philosophy, refer to my talk on MAS ([link](https://github.com/caesar0301/mas-talk-2508/blob/master/mas-talk-xmingc.pdf)).
+This is part of [project Cogents](https://github.com/mirasurf/cogents), an initiative to develop a cognitive, computation-driven agentic system. This repo the foundational abstractions (Agent, Memory, Tool, Goal, Orchestration, and more) along with essential modules such as LLM clients, logging, message buses, model routing, and observability. For the underlying philosophy, refer to my talk on MAS ([link](https://github.com/caesar0301/mas-talk-2508/blob/master/mas-talk-xmingc.pdf)).
 
 ## Core Modules
 
