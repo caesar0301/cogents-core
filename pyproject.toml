@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cogents-core"
-version = "0.1.9.1"
+version = "0.1.10"
 description = "Towards a cognitive agentic framework"
 readme = "README.md"
 license = "MIT"
@@ -51,6 +51,10 @@ dependencies = [
     "networkx>=3.5",
     # MCP support
     "mcp>=1.0.0",
+    # vector store
+    "weaviate-client>=4.16.9",
+    "psycopg2>=2.9.10",
+    "psycopg2-binary>=2.9.0",
 ]
 
 [project.optional-dependencies]
