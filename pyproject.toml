@@ -77,6 +77,10 @@ dev = [
 Homepage = "https://github.com/mirasurf/cogents-core"
 Repository = "https://github.com/mirasurf/cogents-core"
 
+[tool.uv.environment]
+CC = "gcc" # workaround llama-cpp-python using gcc-11
+CXX = "g++"
+
 [tool.setuptools.packages.find]
 include = ["cogents_core*"]
 
