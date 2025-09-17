@@ -61,8 +61,6 @@ def create_sample_documents() -> List[Dict[str, Any]]:
         },
     ]
 
-    
-
 
 async def demo_pgvector_store():
     """Demonstrate basic PGVector store operations."""
