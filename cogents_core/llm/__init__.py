@@ -1,8 +1,6 @@
 import os
 from typing import Optional
 
-from deprecated import deprecated
-
 from .base import BaseLLMClient
 
 # Deprecated imports
