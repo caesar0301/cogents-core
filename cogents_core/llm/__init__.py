@@ -35,6 +35,7 @@ except ImportError:
 
 
 __all__ = [
+    "get_llm_client",
     "BaseLLMClient",
     # -- Deprecated imports --
     "LitellmLLMClient",
@@ -48,9 +49,6 @@ __all__ = [
     "OllamaClient",
     "OpenAIClient",
     "OpenRouterClient",
-    # -- Common functions --
-    "get_llm_client",
-    "get_llm_client_instructor",  # Deprecated
 ]
 
 #############################
@@ -62,8 +60,7 @@ def get_llm_client(
     provider: str = os.getenv("COGENTS_LLM_PROVIDER", "openai"),
     base_url: Optional[str] = None,
     api_key: Optional[str] = None,
-    instructor: bool = False,  # Deprecated by structured_output
-    structured_output: bool = False,
+    structured_output: bool = True,
     chat_model: Optional[str] = None,
     vision_model: Optional[str] = None,
     embed_model: Optional[str] = None,
@@ -76,7 +73,6 @@ def get_llm_client(
         provider: LLM provider to use ("openrouter", "openai", "litellm" always available; "ollama", "llamacpp" require optional dependencies)
         base_url: Base URL for API (used by openai and ollama providers)
         api_key: API key for authentication (used by openai and openrouter providers)
-        instructor: Whether to enable instructor for structured output
         structured_output: Whether to enable structured output
         chat_model: Model to use for chat completions
         vision_model: Model to use for vision tasks
@@ -91,9 +87,6 @@ def get_llm_client(
     Raises:
         ValueError: If provider is not supported or dependencies are missing
     """
-    if instructor:
-        structured_output = True
-
     if provider == "openrouter":
         return OpenRouterLLMClient(
             base_url=base_url,
@@ -150,46 +143,3 @@ def get_llm_client(
         raise ValueError(
             f"Unsupported provider: {provider}. Supported providers: openrouter, openai, ollama, llamacpp, litellm"
         )
-
-
-@deprecated("Use get_llm_client with instructor=True instead")
-def get_llm_client_instructor(
-    provider: str = os.getenv("COGENTS_LLM_PROVIDER", "openai"),
-    base_url: Optional[str] = None,
-    api_key: Optional[str] = None,
-    chat_model: Optional[str] = None,
-    vision_model: Optional[str] = None,
-    embed_model: Optional[str] = None,
-    **kwargs,
-):
-    """
-    Get an LLM client instance with instructor support based on the specified provider.
-
-    Args:
-        provider: LLM provider to use ("openrouter", "openai", "litellm" always available; "ollama", "llamacpp" require optional dependencies)
-        base_url: Base URL for API (used by openai and ollama providers)
-        api_key: API key for authentication (used by openai and openrouter providers)
-        chat_model: Model to use for chat completions
-        vision_model: Model to use for vision tasks
-        embed_model: Model to use for embeddings
-        **kwargs: Additional provider-specific arguments:
-            - llamacpp: model_path, n_ctx, n_gpu_layers, etc.
-            - others: depends on provider
-
-    Returns:
-        LLMClient instance with instructor enabled for the specified provider
-
-    Raises:
-        ValueError: If provider is not supported or dependencies are missing
-    """
-    return get_llm_client(
-        provider=provider,
-        base_url=base_url,
-        api_key=api_key,
-        instructor=True,
-        structured_output=True,
-        chat_model=chat_model,
-        vision_model=vision_model,
-        embed_model=embed_model,
-        **kwargs,
-    )

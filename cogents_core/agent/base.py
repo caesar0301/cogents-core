@@ -7,7 +7,7 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph
 from pydantic import BaseModel, Field
 
-from cogents_core.llm import get_llm_client_instructor
+from cogents_core.llm import get_llm_client
 from cogents_core.tracing import get_token_tracker
 from cogents_core.utils.logging import get_logger
 from cogents_core.utils.typing import override
@@ -32,7 +32,7 @@ class BaseAgent(ABC):
         self.model_name = model_name
 
         # Initialize LLM client with instructor support
-        self.llm = get_llm_client_instructor(provider=llm_provider, chat_model=model_name)
+        self.llm = get_llm_client(provider=llm_provider, chat_model=model_name)
 
         self.logger.info(f"Initialized {self.__class__.__name__} with {llm_provider} provider")
 

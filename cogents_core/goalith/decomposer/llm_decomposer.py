@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 
 from cogents_core.goalith.errors import DecompositionError
 from cogents_core.goalith.goalgraph.node import GoalNode
-from cogents_core.llm import get_llm_client_instructor
+from cogents_core.llm import get_llm_client
 from cogents_core.utils.logging import get_logger
 
 from .base import GoalDecomposer
@@ -108,7 +108,7 @@ class LLMDecomposer(GoalDecomposer):
     def llm_client(self):
         """Lazily initialize and return the LLM client."""
         if self._llm_client is None:
-            self._llm_client = get_llm_client_instructor(provider=self._provider, chat_model=self._model_name)
+            self._llm_client = get_llm_client(provider=self._provider, chat_model=self._model_name)
         return self._llm_client
 
     def decompose(self, goal_node: GoalNode, context: Optional[Dict[str, Any]] = None) -> List[GoalNode]:
