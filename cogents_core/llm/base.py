@@ -18,6 +18,7 @@ class BaseLLMClient(ABC):
         Args:
             **kwargs: Additional arguments to pass to the LLM client
         """
+        self.debug = os.getenv("COGENTS_DEBUG", "false").lower() == "true"
 
     @abstractmethod
     def completion(

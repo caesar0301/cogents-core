@@ -101,6 +101,7 @@ class LLMClient(BaseLLMClient):
             n_gpu_layers: Number of layers to offload to GPU (-1 for all)
             **kwargs: Additional arguments to pass to Llama constructor
         """
+        super().__init__(**kwargs)
         # Configure Opik tracing for observability only if enabled
         if OPIK_AVAILABLE:
             configure_opik()
@@ -176,6 +177,9 @@ class LLMClient(BaseLLMClient):
             if max_tokens is None:
                 max_tokens = kwargs.get("max_tokens", 512)
 
+            if self.debug:
+                logger.debug(f"Chat completion: {prompt}")
+
             # Generate response
             response = self.llama(
                 prompt,
@@ -236,6 +240,9 @@ class LLMClient(BaseLLMClient):
             modified_messages[-1]["content"] += json_instruction
         else:
             modified_messages = [{"role": "user", "content": json_instruction}]
+
+        if self.debug:
+            logger.debug(f"Structured completion: {modified_messages}")
 
         import time
 

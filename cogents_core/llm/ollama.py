@@ -62,6 +62,7 @@ class LLMClient(BaseLLMClient):
             vision_model: Model to use for vision tasks (defaults to gemma3:4b)
             **kwargs: Additional arguments
         """
+        super().__init__(**kwargs)
         # Configure Opik tracing for observability only if enabled
         if OPIK_AVAILABLE:
             configure_opik()
@@ -131,6 +132,9 @@ class LLMClient(BaseLLMClient):
             if max_tokens:
                 options["num_predict"] = max_tokens
 
+            if self.debug:
+                logger.debug(f"Chat completion: {messages}")
+
             response = self.client.chat(
                 model=self.chat_model,
                 messages=messages,
@@ -186,6 +190,9 @@ class LLMClient(BaseLLMClient):
         """
         if not self.instructor:
             raise ValueError("Instructor is not enabled. Initialize LLMClient with instructor=True")
+
+        if self.debug:
+            logger.debug(f"Structured completion: {messages}")
 
         last_err = None
         for i in range(attempts):
@@ -269,6 +276,9 @@ class LLMClient(BaseLLMClient):
             if max_tokens:
                 options["num_predict"] = max_tokens
 
+            if self.debug:
+                logger.debug(f"Understand image: {messages}")
+
             response = self.client.chat(
                 model=self.vision_model,
                 messages=messages,
@@ -336,6 +346,9 @@ class LLMClient(BaseLLMClient):
             }
             if max_tokens:
                 options["num_predict"] = max_tokens
+
+            if self.debug:
+                logger.debug(f"Understand image from url: {messages}")
 
             response = self.client.chat(
                 model=self.vision_model,

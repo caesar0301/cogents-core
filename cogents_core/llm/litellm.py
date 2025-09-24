@@ -64,6 +64,7 @@ class LLMClient(BaseLLMClient):
             vision_model: Model to use for vision tasks (e.g., "gpt-4-vision-preview", "claude-3-sonnet")
             **kwargs: Additional arguments
         """
+        super().__init__(**kwargs)
         # Configure Opik tracing for observability only if enabled
         if OPIK_AVAILABLE:
             configure_opik()
@@ -145,6 +146,9 @@ class LLMClient(BaseLLMClient):
             }
 
         try:
+            if self.debug:
+                logger.debug(f"Chat completion: {messages}")
+
             response = litellm.completion(
                 model=self.chat_model,
                 messages=messages,
@@ -234,6 +238,9 @@ class LLMClient(BaseLLMClient):
                 else:
                     structured_messages.append({"role": "user", "content": schema_prompt})
 
+                if self.debug:
+                    logger.debug(f"Structured completion: {structured_messages}")
+
                 response = litellm.completion(
                     model=self.chat_model,
                     messages=structured_messages,
@@ -320,6 +327,9 @@ class LLMClient(BaseLLMClient):
                 }
             ]
 
+            if self.debug:
+                logger.debug(f"Understand image: {messages}")
+
             response = litellm.completion(
                 model=self.vision_model,
                 messages=messages,
@@ -377,6 +387,9 @@ class LLMClient(BaseLLMClient):
                     ],
                 }
             ]
+
+            if self.debug:
+                logger.debug(f"Understand image from url: {messages}")
 
             response = litellm.completion(
                 model=self.vision_model,
