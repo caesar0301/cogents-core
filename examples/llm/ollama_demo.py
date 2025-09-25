@@ -289,13 +289,13 @@ def demo_embeddings_and_reranking(client: LLMClient, logger):
 
         # Test reranking
         logger.info("Testing document reranking...")
-        reranked_docs = client.rerank(query, documents)
+        reranked_results = client.rerank(query, documents)
 
         logger.info("✅ Reranking successful!")
         print(f"\n🔍 Query: {query}")
         print("\n📊 Reranked Documents (most relevant first):")
-        for i, doc in enumerate(reranked_docs[:3], 1):
-            print(f"{i}. {doc}")
+        for i, (similarity, original_index, doc) in enumerate(reranked_results[:3], 1):
+            print(f"{i}. [Score: {similarity:.4f}, Original Index: {original_index}] {doc}")
         print()
         return True
 

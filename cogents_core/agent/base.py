@@ -36,6 +36,10 @@ class BaseAgent(ABC):
 
         self.logger.info(f"Initialized {self.__class__.__name__} with {llm_provider} provider")
 
+    @abstractmethod
+    def run(self, user_message: str, context: Dict[str, Any] = None, config: Optional[RunnableConfig] = None) -> Any:
+        """Run the agent with a user message and context."""
+
     def get_token_usage_stats(self) -> Dict[str, Any]:
         """Get comprehensive token usage statistics."""
         return get_token_tracker().get_stats()
@@ -49,10 +53,6 @@ class BaseAgent(ABC):
             )
         else:
             print("FINAL_SUMMARY: 0 total | 0 calls | P:0 C:0")
-
-    @abstractmethod
-    def run(self, user_message: str, context: Dict[str, Any] = None, config: Optional[RunnableConfig] = None) -> str:
-        """Run the agent with a user message and context."""
 
 
 class BaseGraphicAgent(BaseAgent):

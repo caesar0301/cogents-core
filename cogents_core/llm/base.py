@@ -1,7 +1,7 @@
 import os
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
 from cogents_core.consts import DEFAULT_EMBEDDING_DIMS
 
@@ -129,8 +129,18 @@ class BaseLLMClient(ABC):
         self,
         query: str,
         chunks: List[str],
-    ) -> List[str]:
-        """Rerank chunks based on their relevance to the query"""
+    ) -> List[Tuple[float, int, str]]:
+        """
+        Rerank chunks based on their relevance to the query.
+
+        Args:
+            query: The query to rank against
+            chunks: List of text chunks to rerank
+
+        Returns:
+            List of tuples (similarity_score, original_index, chunk_text)
+            sorted by similarity score in descending order
+        """
 
     def get_embedding_dimensions(self) -> int:
         """

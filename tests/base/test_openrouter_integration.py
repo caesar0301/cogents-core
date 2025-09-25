@@ -293,27 +293,25 @@ class TestOpenRouterIntegration:
             chunk_embeddings = self.client.embed_batch(chunks)
 
             # Rerank chunks
-            reranked_chunks = self.client.rerank(query, chunks)
+            reranked_results = self.client.rerank(query, chunks)
 
-            # Manual similarity calculation
-            import math
-
-            def cosine_similarity(a, b):
-                dot_product = sum(x * y for x, y in zip(a, b))
-                magnitude_a = math.sqrt(sum(x * x for x in a))
-                magnitude_b = math.sqrt(sum(x * x for x in b))
-                return dot_product / (magnitude_a * magnitude_b) if magnitude_a and magnitude_b else 0
+            from cogents_core.utils.statistics import cosine_similarity
 
             similarities = []
             for i, chunk_embedding in enumerate(chunk_embeddings):
                 similarity = cosine_similarity(query_embedding, chunk_embedding)
-                similarities.append((similarity, chunks[i]))
+                similarities.append((similarity, i, chunks[i]))
 
             similarities.sort(key=lambda x: x[0], reverse=True)
-            expected_order = [chunk for _, chunk in similarities]
 
-            # The reranked order should match our manual calculation
-            assert reranked_chunks == expected_order
+            # The reranked results should match our manual calculation
+            assert reranked_results == similarities
+
+            # Verify the structure of returned tuples
+            assert all(len(result) == 3 for result in reranked_results)
+            assert all(isinstance(result[0], (int, float)) for result in reranked_results)  # similarity score
+            assert all(isinstance(result[1], int) for result in reranked_results)  # original index
+            assert all(isinstance(result[2], str) for result in reranked_results)  # chunk text
 
         except Exception as e:
             if "api key" in str(e).lower():
@@ -335,7 +333,11 @@ class TestOpenRouterIntegration:
             # Single chunk
             single_chunk = ["Single test chunk"]
             result = self.client.rerank("query", single_chunk)
-            assert result == single_chunk
+            assert len(result) == 1
+            similarity, index, chunk = result[0]
+            assert isinstance(similarity, (int, float))
+            assert index == 0
+            assert chunk == "Single test chunk"
 
         except Exception as e:
             if "api key" in str(e).lower():

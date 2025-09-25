@@ -247,13 +247,13 @@ def demo_reranking(client, logger):
     query = "What programming language is best for artificial intelligence and machine learning?"
 
     try:
-        reranked_docs = client.rerank(query, documents)
+        reranked_results = client.rerank(query, documents)
 
         logger.info("✅ Document reranking successful!")
         print(f"\n🔍 Query: {query}")
         print(f"\n📊 Reranked Documents (most relevant first):")
-        for i, doc in enumerate(reranked_docs[:5], 1):
-            print(f"{i}. {doc}")
+        for i, (similarity, original_index, doc) in enumerate(reranked_results[:5], 1):
+            print(f"{i}. [Score: {similarity:.4f}, Original Index: {original_index}] {doc}")
         print()
         return True
 

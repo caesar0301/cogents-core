@@ -14,7 +14,7 @@ import base64
 import os
 import time
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
 import litellm
 from instructor import Instructor, Mode, patch
@@ -488,7 +488,7 @@ class LLMClient(BaseLLMClient):
                 embeddings.append(embedding)
             return embeddings
 
-    def rerank(self, query: str, chunks: List[str]) -> List[str]:
+    def rerank(self, query: str, chunks: List[str]) -> List[Tuple[float, int, str]]:
         """
         Rerank chunks based on their relevance to the query.
 
@@ -500,23 +500,15 @@ class LLMClient(BaseLLMClient):
             chunks: List of text chunks to rerank
 
         Returns:
-            Reranked list of chunks
+            List of tuples (similarity_score, original_index, chunk_text)
+            sorted by similarity score in descending order
         """
         try:
             # Get embeddings for query and chunks
             query_embedding = self.embed(query)
             chunk_embeddings = self.embed_batch(chunks)
 
-            # Calculate cosine similarity
-            import math
-
-            def cosine_similarity(a: List[float], b: List[float]) -> float:
-                dot_product = sum(x * y for x, y in zip(a, b))
-                magnitude_a = math.sqrt(sum(x * x for x in a))
-                magnitude_b = math.sqrt(sum(x * x for x in b))
-                if magnitude_a == 0 or magnitude_b == 0:
-                    return 0
-                return dot_product / (magnitude_a * magnitude_b)
+            from cogents_core.utils.statistics import cosine_similarity
 
             # Calculate similarities and sort
             similarities = []
@@ -527,10 +519,10 @@ class LLMClient(BaseLLMClient):
             # Sort by similarity (descending)
             similarities.sort(key=lambda x: x[0], reverse=True)
 
-            # Return reranked chunks
-            return [chunk for _, _, chunk in similarities]
+            # Return sorted tuples
+            return similarities
 
         except Exception as e:
             logger.error(f"Error reranking with LiteLLM: {e}")
-            # Fallback: return original order
-            return chunks
+            # Fallback: return original order with zero similarities
+            return [(0.0, i, chunk) for i, chunk in enumerate(chunks)]

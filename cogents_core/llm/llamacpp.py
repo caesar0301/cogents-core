@@ -1,7 +1,7 @@
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, List, Optional, Tuple, Type, TypeVar, Union
 
 from huggingface_hub import snapshot_download
 from llama_cpp import Llama
@@ -447,7 +447,7 @@ class LLMClient(BaseLLMClient):
             logger.error(f"Error generating batch embeddings with llama.cpp: {e}")
             raise
 
-    def rerank(self, query: str, chunks: List[str]) -> List[str]:
+    def rerank(self, query: str, chunks: List[str]) -> List[Tuple[float, int, str]]:
         """
         Rerank chunks based on their relevance to the query.
 
@@ -459,23 +459,15 @@ class LLMClient(BaseLLMClient):
             chunks: List of text chunks to rerank
 
         Returns:
-            Reranked list of chunks
+            List of tuples (similarity_score, original_index, chunk_text)
+            sorted by similarity score in descending order
         """
         try:
             # Try to use embeddings for reranking
             query_embedding = self.embed(query)
             chunk_embeddings = self.embed_batch(chunks)
 
-            # Calculate cosine similarity
-            import math
-
-            def cosine_similarity(a: List[float], b: List[float]) -> float:
-                dot_product = sum(x * y for x, y in zip(a, b))
-                magnitude_a = math.sqrt(sum(x * x for x in a))
-                magnitude_b = math.sqrt(sum(x * x for x in b))
-                if magnitude_a == 0 or magnitude_b == 0:
-                    return 0
-                return dot_product / (magnitude_a * magnitude_b)
+            from cogents_core.utils.statistics import cosine_similarity
 
             # Calculate similarities and sort
             similarities = []
@@ -486,42 +478,10 @@ class LLMClient(BaseLLMClient):
             # Sort by similarity (descending)
             similarities.sort(key=lambda x: x[0], reverse=True)
 
-            # Return reranked chunks
-            return [chunk for _, _, chunk in similarities]
+            # Return sorted tuples
+            return similarities
 
         except Exception as e:
-            logger.warning(f"Embedding-based reranking failed: {e}")
-            logger.info("Falling back to simple text-based reranking")
-
-            # Fallback: simple text-based similarity
-            try:
-
-                def simple_text_similarity(query: str, text: str) -> float:
-                    """Simple text similarity based on common words."""
-                    query_words = set(query.lower().split())
-                    text_words = set(text.lower().split())
-
-                    if not query_words or not text_words:
-                        return 0.0
-
-                    intersection = query_words.intersection(text_words)
-                    union = query_words.union(text_words)
-
-                    return len(intersection) / len(union) if union else 0.0
-
-                # Calculate text similarities and sort
-                similarities = []
-                for i, chunk in enumerate(chunks):
-                    similarity = simple_text_similarity(query, chunk)
-                    similarities.append((similarity, i, chunk))
-
-                # Sort by similarity (descending)
-                similarities.sort(key=lambda x: x[0], reverse=True)
-
-                # Return reranked chunks
-                return [chunk for _, _, chunk in similarities]
-
-            except Exception as fallback_error:
-                logger.error(f"Fallback reranking also failed: {fallback_error}")
-                # Last resort: return original order
-                return chunks
+            logger.error(f"Fallback reranking also failed: {e}")
+            # Last resort: return original order with zero similarities
+            return [(0.0, i, chunk) for i, chunk in enumerate(chunks)]

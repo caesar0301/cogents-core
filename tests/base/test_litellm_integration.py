@@ -197,12 +197,21 @@ class TestLiteLLMIntegration:
         ]
 
         try:
-            reranked_chunks = self.client.rerank(query, chunks)
+            reranked_results = self.client.rerank(query, chunks)
 
             # Assertions
-            assert reranked_chunks is not None
-            assert isinstance(reranked_chunks, list)
-            assert len(reranked_chunks) == len(chunks)
+            assert reranked_results is not None
+            assert isinstance(reranked_results, list)
+            assert len(reranked_results) == len(chunks)
+
+            # Verify the structure of returned tuples
+            assert all(len(result) == 3 for result in reranked_results)
+            assert all(isinstance(result[0], (int, float)) for result in reranked_results)  # similarity score
+            assert all(isinstance(result[1], int) for result in reranked_results)  # original index
+            assert all(isinstance(result[2], str) for result in reranked_results)  # chunk text
+
+            # Extract chunks for content verification
+            reranked_chunks = [result[2] for result in reranked_results]
             assert set(reranked_chunks) == set(chunks)  # Same chunks, different order
 
             # The first chunk should be more relevant to the query
@@ -311,7 +320,11 @@ class TestLiteLLMIntegration:
             # Single chunk
             single_chunk = ["Single test chunk"]
             result = self.client.rerank("query", single_chunk)
-            assert result == single_chunk
+            assert len(result) == 1
+            similarity, index, chunk = result[0]
+            assert isinstance(similarity, (int, float))
+            assert index == 0
+            assert chunk == "Single test chunk"
 
         except Exception as e:
             if "embedding" in str(e).lower() or "api key" in str(e).lower():
