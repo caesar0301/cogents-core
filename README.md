@@ -1,10 +1,10 @@
 # Cogents-core
 
-[![CI](https://github.com/mirasurf/cogents-core/actions/workflows/ci.yml/badge.svg)](https://github.com/mirasurf/cogents-core/actions/workflows/ci.yml)
+[![CI](https://github.com/caesar0301/cogents-core/actions/workflows/ci.yml/badge.svg)](https://github.com/caesar0301/cogents-core/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/cogents-core.svg)](https://pypi.org/project/cogents-core/)
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/mirasurf/cogents-core)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/caesar0301/cogents-core)
 
-This is part of [project Cogents](https://github.com/mirasurf/cogents), an initiative to develop a cognitive, computation-driven agentic system. This repo the foundational abstractions (Agent, Memory, Tool, Goal, Orchestration, and more) along with essential modules such as LLM clients, logging, message buses, model routing, and observability. For the underlying philosophy, refer to my talk on MAS ([link](https://github.com/caesar0301/mas-talk-2508/blob/master/mas-talk-xmingc.pdf)).
+This is part of project Cogents, an initiative to develop a cognitive, computation-driven agentic system. This repo the foundational abstractions (Agent, Memory, Tool, Goal, Orchestration, and more) along with essential modules such as LLM clients, logging, message buses, model routing, and observability. For the underlying philosophy, refer to my talk on MAS ([link](https://github.com/caesar0301/mas-talk-2508/blob/master/mas-talk-xmingc.pdf)).
 
 ## Core Modules
 
