@@ -209,3 +209,4 @@ thirdparty/
 vendors/
 full.diff
 uv.lock
+.python-version
