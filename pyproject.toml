@@ -52,7 +52,8 @@ dependencies = [
     # MCP support
     "mcp>=1.0.0",
     # vector store
-    "weaviate-client>=4.16.9",
+    "protobuf>=5,<6",
+    "weaviate-client>=4,<5",
     "psycopg2>=2.9.10",
     "psycopg2-binary>=2.9.0",
 ]
