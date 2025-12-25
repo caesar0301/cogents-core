@@ -326,6 +326,9 @@ print(f"Average tokens per call: {stats.get('avg_tokens_per_call', 0)}")
 Set these environment variables for different providers:
 
 ```bash
+# Default LLM provider
+export COGENTS_LLM_PROVIDER="openai"
+
 # OpenAI
 export OPENAI_API_KEY="sk-..."
 
@@ -344,9 +347,6 @@ export POSTGRES_PORT="5432"
 export POSTGRES_DB="vectordb"
 export POSTGRES_USER="postgres"
 export POSTGRES_PASSWORD="postgres"
-
-# Default LLM provider
-export COGENTS_LLM_PROVIDER="openai"
 ```
 
 ## Advanced Usage
@@ -448,21 +448,17 @@ Check the `examples/` directory for comprehensive usage examples:
 
 ```bash
 # Install development dependencies
-pip install -e ".[dev]"
+make install
 
 # Run tests
-pytest tests/
+make test
 
 # Run specific test categories
-pytest -m "not integration"  # Unit tests only
-pytest -m integration        # Integration tests only
+make test-unit          # Unit tests only
+make test-integration   # Integration tests only
 
 # Format code
-black cogents_core/
-isort cogents_core/
-
-# Type checking
-mypy cogents_core/
+make format
 ```
 
 ## License
