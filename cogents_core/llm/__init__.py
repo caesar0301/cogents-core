@@ -59,6 +59,7 @@ def get_llm_client(
     base_url: Optional[str] = None,
     api_key: Optional[str] = None,
     structured_output: bool = True,
+    instructor: Optional[bool] = None,
     chat_model: Optional[str] = None,
     vision_model: Optional[str] = None,
     embed_model: Optional[str] = None,
@@ -71,13 +72,15 @@ def get_llm_client(
         provider: LLM provider to use ("openrouter", "openai", "litellm" always available; "ollama", "llamacpp" require optional dependencies)
         base_url: Base URL for API (used by openai and ollama providers)
         api_key: API key for authentication (used by openai and openrouter providers)
-        structured_output: Whether to enable structured output
+        structured_output: Whether to enable structured output (default: True)
+        instructor: Whether to enable instructor for structured output (deprecated, use structured_output instead)
         chat_model: Model to use for chat completions
         vision_model: Model to use for vision tasks
         embed_model: Model to use for embeddings
         **kwargs: Additional provider-specific arguments:
             - llamacpp: model_path, n_ctx, n_gpu_layers, etc.
             - others: depends on provider
+            Note: 'instructor' in kwargs will be removed to avoid conflicts
 
     Returns:
         LLMClient instance for the specified provider
@@ -85,11 +88,19 @@ def get_llm_client(
     Raises:
         ValueError: If provider is not supported or dependencies are missing
     """
+    # Handle backward compatibility: enable instructor if either parameter is True
+    # If instructor is explicitly provided (True/False), use it OR structured_output
+    # If instructor is None, use structured_output
+    enable_instructor = (instructor if instructor is not None else False) or structured_output
+
+    # Remove 'instructor' from kwargs to avoid duplicate argument errors
+    kwargs.pop("instructor", None)
+
     if provider == "openrouter":
         return OpenRouterLLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=structured_output,
+            instructor=enable_instructor,
             chat_model=chat_model,
             vision_model=vision_model,
             embed_model=embed_model,
@@ -99,7 +110,7 @@ def get_llm_client(
         return OpenAILLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=structured_output,
+            instructor=enable_instructor,
             chat_model=chat_model,
             vision_model=vision_model,
             embed_model=embed_model,
@@ -111,7 +122,7 @@ def get_llm_client(
         return OllamaLLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=structured_output,
+            instructor=enable_instructor,
             chat_model=chat_model,
             vision_model=vision_model,
             embed_model=embed_model,
@@ -121,7 +132,7 @@ def get_llm_client(
         if not LLAMACPP_AVAILABLE:
             raise ValueError("llamacpp provider is not available. Please install the required dependencies.")
         return LlamaCppLLMClient(
-            instructor=structured_output,
+            instructor=enable_instructor,
             chat_model=chat_model,
             vision_model=vision_model,
             embed_model=embed_model,
@@ -131,7 +142,7 @@ def get_llm_client(
         return LitellmLLMClient(
             base_url=base_url,
             api_key=api_key,
-            instructor=structured_output,
+            instructor=enable_instructor,
             chat_model=chat_model,
             vision_model=vision_model,
             embed_model=embed_model,
