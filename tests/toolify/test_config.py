@@ -2,6 +2,9 @@
 Tests for toolkit configuration system.
 """
 
+import os
+from unittest.mock import patch
+
 from cogents_core.toolify.config import ToolkitConfig, create_toolkit_config
 
 
@@ -10,15 +13,22 @@ class TestToolkitConfig:
 
     def test_default_config(self):
         """Test default configuration values."""
-        config = ToolkitConfig()
+        # Clear environment variable to test true defaults
+        with patch.dict(os.environ, {}, clear=False):
+            # Remove the specific env var if it exists
+            os.environ.pop("COGENTS_LLM_PROVIDER", None)
+            os.environ.pop("LOG_LEVEL", None)
+            os.environ.pop("COGENTS_ENABLE_TRACING", None)
 
-        assert config.mode == "builtin"
-        assert config.name is None
-        assert config.activated_tools is None
-        assert config.config == {}
-        assert config.llm_provider == "openai"
-        assert config.llm_model is None
-        assert config.llm_config == {}
+            config = ToolkitConfig()
+
+            assert config.mode == "builtin"
+            assert config.name is None
+            assert config.activated_tools is None
+            assert config.config == {}
+            assert config.llm_provider == "openai"
+            assert config.llm_model is None
+            assert config.llm_config == {}
 
     def test_custom_config(self):
         """Test custom configuration values."""
