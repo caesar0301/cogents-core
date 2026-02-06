@@ -1,5 +1,7 @@
 # Cogents-core
 
+>  🗣️🗣️🗣️ This project has been archived since 2026-02 and contributed to [Mirasoth's Noesium](https://github.com/mirasoth/noesium/tree/main/noesium/core).
+
 [![CI](https://github.com/caesar0301/cogents-core/actions/workflows/ci.yml/badge.svg)](https://github.com/caesar0301/cogents-core/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/cogents-core.svg)](https://pypi.org/project/cogents-core/)
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/caesar0301/cogents-core)
